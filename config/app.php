@@ -135,6 +135,7 @@ return [
     */
 
     'providers' => [
+        'Webpatser\Countries\CountriesServiceProvider',
 
         /*
          * Laravel Framework Service Providers...
@@ -189,7 +190,7 @@ return [
     */
 
     'aliases' => [
-
+        'Countries' => 'Webpatser\Countries\CountriesFacade',
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
