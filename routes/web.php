@@ -36,14 +36,6 @@ Route::get('/test', function () {
 Auth::routes();
 
 // ======================================================================================== //
-// Home Routes
-// generated from laravel/ui package
-// define page that user will go first after login based on roles/permissions
-// ======================================================================================== //
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// ======================================================================================== //
 // Logged In Routes
 // only user with session can use this routes (with their auth)
 // ======================================================================================== //
