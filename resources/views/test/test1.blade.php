@@ -4,7 +4,8 @@
 @section('user-name', 'USER')
 
 @section('breadcrumb')
-    <a>Test</a> / <a>Test1</a>
+    <a>Test</a> /
+    <a>Test1</a>
 @stop
 
 @section('content')

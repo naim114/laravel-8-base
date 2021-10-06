@@ -15,6 +15,13 @@ class RolesSeeder extends Seeder
     public function run()
     {
         Role::create([
+            'name' => 'Super Admin',
+            'display_name' => 'Super Admin',
+            'description' => 'Total control administrator.',
+            'removable' => false
+        ]);
+
+        Role::create([
             'name' => 'Admin',
             'display_name' => 'Admin',
             'description' => 'System administrator.',

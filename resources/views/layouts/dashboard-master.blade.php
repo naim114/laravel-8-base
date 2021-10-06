@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@yield('page-title') - {{ config('app.name') }}</title>
-    <link rel="icon" type="image/png" href="img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" href="{{ trans('app.favicon') }}">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
