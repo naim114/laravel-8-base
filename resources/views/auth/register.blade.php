@@ -29,8 +29,9 @@
                         <div class="col-md-6">
                             <div class="form-floating">
                                 <input class="form-control @error('username') is-invalid @enderror" id="username"
-                                    type="text" name="username" value="{{ old('username') }}"
-                                    placeholder="Enter your username" required autofocus />
+                                    type="text" name="username" value="{{ old('username') }}" pattern="\S+"
+                                    autocomplete="new-password" placeholder="Enter your username" required autofocus
+                                    title="This field is required and no whitespace allowed." />
                                 <label for="username">Username</label>
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -71,6 +72,12 @@
                                 <input class="form-control" id="password-confirm" type="password"
                                     placeholder="Confirm password" name="password_confirmation" required />
                                 <label for="password-confirm">Confirm Password</label>
+
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>

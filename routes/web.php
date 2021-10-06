@@ -16,46 +16,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('test/test1');
+// ======================================================================================== //
+// Index Routes
+// defining the index page
+// ======================================================================================== //
+
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/test', function () {
+    return view('dashboard.admin');
 });
 
 // ======================================================================================== //
-// auth - Auth Routes
+// Auth Routes
+// generated from laravel/ui package
+// php artisan route:list to see if the routes is really there
 // ======================================================================================== //
 
-// Route::get(
-//     '/login',
-//     [AuthController::class, 'getLogin']
-// )->name('auth.login');
-
-// Route::get(
-//     '/register',
-//     [AuthController::class, 'getRegister']
-// )->name('auth.goregister'); //TODO figured this out
-
 Auth::routes();
+
+// ======================================================================================== //
+// Home Routes
+// generated from laravel/ui package
+// define page that user will go first after login based on roles/permissions
+// ======================================================================================== //
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // ======================================================================================== //
 // Logged In Routes
+// only user with session can use this routes (with their auth)
 // ======================================================================================== //
 
-
-Route::get(
-    '/dashboard',
-    [DashboardController::class, 'index']
-)->name('dashboard');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get(
+//     '/dashboard',
+//     [DashboardController::class, 'index']
+// )->name('dashboard');

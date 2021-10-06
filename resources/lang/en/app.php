@@ -1,5 +1,7 @@
 <?php
 
+// TODO create user activity function
+// TODO study creating permission
 return [
     // general
     'favicon' => 'assets/icons/favicon-32x32.png',
