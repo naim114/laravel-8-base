@@ -21,7 +21,13 @@ use Illuminate\Support\Facades\Route;
 // defining the index page
 // ======================================================================================== //
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+/**
+ *  Defining the index route
+ */
+Route::get(
+    '/',
+    [DashboardController::class, 'index']
+)->name('dashboard');
 
 Route::get('/test', function () {
     return view('dashboard.admin');

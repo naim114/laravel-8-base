@@ -6,6 +6,9 @@ php artisan make:migration ObjectName
 ### Run migration w/ seeders
 php artisan migrate:refresh --seed
 
+to revert back migration
+php artisan migrate:reset 
+
 ### Create seeders
 php artisan make:seeder ObjectName
 
@@ -16,5 +19,10 @@ Put assets, css, js folders/files inside public and just
 
 ### Authentication Settings/UI
 
-this package https://github.com/webpatser/laravel-countries will automatically create controller, middle, views, etc for registration, login, etc
+this package, Laravel UI (https://github.com/laravel/ui) will automatically create controller, middle, views, etc for registration, login, etc
 watch https://www.youtube.com/watch?v=XCrmk1bKxf4 for tutorial
+alternative for Laravel UI is Laravel Fortify
+
+### Creating events & listeners (for activity log)
+
+read https://dev.to/kingsconsult/laravel-8-events-and-listeners-with-practical-example-9m7
