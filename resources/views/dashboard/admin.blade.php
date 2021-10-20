@@ -10,4 +10,5 @@
 
 @section('content')
     <p>Only admin can view this page</p>
+    <p><a href="{{ route('users') }}">Users</a></p>
 @stop

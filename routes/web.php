@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,11 +42,16 @@ Route::get('/test', function () {
 Auth::routes();
 
 // ======================================================================================== //
-// Logged In Routes
-// only user with session can use this routes (with their auth)
+// Authorised (Logged In) Routes
+// only authorised user can access these route
 // ======================================================================================== //
 
-// Route::get(
-//     '/dashboard',
-//     [DashboardController::class, 'index']
-// )->name('dashboard');
+Route::group(['middleware' => ['auth']], function () {
+    /**
+     *  users - CRUD users
+     */
+    Route::get(
+        '/users',
+        [UsersController::class, 'index']
+    )->name('users')->middleware('permissions:users.manage');
+});

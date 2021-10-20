@@ -26,3 +26,13 @@ alternative for Laravel UI is Laravel Fortify
 ### Creating events & listeners (for activity log)
 
 read https://dev.to/kingsconsult/laravel-8-events-and-listeners-with-practical-example-9m7
+
+### Creating middleware for permission
+
+php artisan make:middleware CheckPermission
+
+register it under routemiddleware
+
+add parameter permission name to middleware
+
+add query and if statement if user's role id has permission id of permission name given 
