@@ -8,34 +8,72 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         {{ trans('app.dashboard') }}
                     </a>
-                    <div class="sb-sidenav-menu-heading">{{ trans('app.administration') }}</div>
+
+                    {{-- Account --}}
+                    <div class="sb-sidenav-menu-heading">{{ trans('app.account') }}</div>
+
                     <a class="nav-link" href="charts.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                        {{ trans('app.users') }}
+                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                        {{ trans('app.profile') }}
                     </a>
+
                     <a class="nav-link" href="charts.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-list-ul"></i></div>
-                        {{ trans('app.activity-log') }}
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        {{ trans('app.activity') }}
                     </a>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-                        aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-lock"></i></div>
-                        {{ trans('app.roles-permissions') }}
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                        data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">{{ trans('app.roles') }}</a>
-                            <a class="nav-link"
-                                href="layout-sidenav-light.html">{{ trans('app.permissions') }}</a>
-                        </nav>
-                    </div>
-                    <div class="sb-sidenav-menu-heading">{{ trans('app.settings') }}</div>
-                    <a class="nav-link" href="charts.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
-                        {{ trans('app.general') }}
-                    </a>
+
+                    {{-- Administrations --}}
+                    @if (has_permission('users.manage') || has_permission('users.activity') || has_permission('roles.manage') || has_permission('permissions.manage'))
+                        <div class="sb-sidenav-menu-heading">{{ trans('app.administration') }}</div>
+                    @endif
+
+                    @if (has_permission('users.manage'))
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            {{ trans('app.users') }}
+                        </a>
+                    @endif
+
+                    @if (has_permission('users.activity'))
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-list-ul"></i></div>
+                            {{ trans('app.activity-log') }}
+                        </a>
+                    @endif
+
+                    @if (has_permission('roles.manage') || has_permission('permissions.manage'))
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-lock"></i></div>
+                            {{ trans('app.roles-permissions') }}
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                @if (has_permission('roles.manage'))
+                                    <a class="nav-link" href="layout-static.html">{{ trans('app.roles') }}</a>
+                                @endif
+                                @if (has_permission('permissions.manage'))
+                                    <a class="nav-link"
+                                        href="layout-sidenav-light.html">{{ trans('app.permissions') }}</a>
+                                @endif
+                            </nav>
+                        </div>
+                    @endif
+
+                    {{-- Settings --}}
+                    @if (has_permission('settings.general'))
+                        <div class="sb-sidenav-menu-heading">{{ trans('app.settings') }}</div>
+                    @endif
+
+                    @if (has_permission('settings.general'))
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
+                            {{ trans('app.general') }}
+                        </a>
+                    @endif
 
                     {{-- Examples --}}
                     {{-- Stack --}}

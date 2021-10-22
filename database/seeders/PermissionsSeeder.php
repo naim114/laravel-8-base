@@ -53,20 +53,6 @@ class PermissionsSeeder extends Seeder
             'removable' => false
         ]);
 
-        $permissions[] = Permission::create([
-            'name' => 'settings.auth',
-            'display_name' => 'Update Authentication Settings',
-            'description' => 'Update authentication and registration system settings.',
-            'removable' => false
-        ]);
-
-        $permissions[] = Permission::create([
-            'name' => 'settings.notifications',
-            'display_name' => 'Update Notifications Settings',
-            'description' => '',
-            'removable' => false
-        ]);
-
         // $adminRole->attachPermissions($permissions);
 
         DB::table('permission_role')->insert(array(
@@ -91,16 +77,6 @@ class PermissionsSeeder extends Seeder
 
         DB::table('permission_role')->insert(array(
             'permission_id' => 5,
-            'role_id' => 1,
-        ));
-
-        DB::table('permission_role')->insert(array(
-            'permission_id' => 6,
-            'role_id' => 1,
-        ));
-
-        DB::table('permission_role')->insert(array(
-            'permission_id' => 7,
             'role_id' => 1,
         ));
     }

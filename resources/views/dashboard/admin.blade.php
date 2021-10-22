@@ -11,4 +11,5 @@
 @section('content')
     <p>Only admin can view this page</p>
     <p><a href="{{ route('users') }}">Users</a></p>
+    <p>{{ has_permission('users.manage') }}</p>
 @stop
