@@ -27,6 +27,12 @@
 
 @section('content')
     <div class="container">
+        @error('avatar')
+            <div class="alert alert-danger" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
+
         <div class="row">
             <div class="col-md-4 col-sm-6 pt-2 pb-2">
                 <div class="card">
@@ -59,6 +65,7 @@
 
 @section('scripts')
     <script>
+        // front-end for avatar button
         $(document).ready(function() {
             $('#fileInput').val(null);
         });
@@ -67,6 +74,8 @@
             $("#inputFileButton").removeClass('hide');
             $("#cancelChangeAvatarButton").removeClass('hide');
             $("#submitAvatarButton").removeClass('hide');
+            $("#guideMsg").removeClass('hide');
+
             $("#changeAvatarButton").addClass('hide');
         });
 
@@ -74,6 +83,8 @@
             $("#inputFileButton").addClass('hide');
             $("#cancelChangeAvatarButton").addClass('hide');
             $("#submitAvatarButton").addClass('hide');
+            $("#guideMsg").addClass('hide');
+
             $("#changeAvatarButton").removeClass('hide');
             $('#fileInput').val(null);
         });

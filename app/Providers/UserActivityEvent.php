@@ -25,7 +25,7 @@ class UserActivityEvent
     {
         $this->user = $user;
         $this->request = $request;
-        $this->request = $desc;
+        $this->desc = $desc;
     }
 
     /**

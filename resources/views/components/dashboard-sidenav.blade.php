@@ -148,6 +148,7 @@
                         @yield('breadcrumb')
                     </li>
                 </ol>
+                @include('components.alerts')
                 @yield('content')
             </div>
         </main>

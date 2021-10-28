@@ -53,8 +53,13 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::get(
         '/profile',
-        [ProfileController::class, 'profile']
+        [ProfileController::class, 'index']
     )->name('profile')->middleware('auth');
+
+    Route::post(
+        '/avatar',
+        [ProfileController::class, 'storeAvatar']
+    )->name('avatar')->middleware('auth');
 
     /**
      *  users - CRUD users
