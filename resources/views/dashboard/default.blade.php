@@ -4,8 +4,8 @@
 @section('user-name', Auth::user()->username)
 
 @section('breadcrumb')
-    <a href="{{ route('dashboard') }}">Dashboard</a> /
-    <a>Dashboard</a>
+    <a href="{{ route('dashboard') }}">{{ trans('app.dashboard') }}</a> /
+    <a>{{ trans('app.dashboard') }}</a>
 @stop
 
 @section('content')

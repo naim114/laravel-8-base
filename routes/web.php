@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,14 @@ Auth::routes();
 // ======================================================================================== //
 
 Route::group(['middleware' => ['auth']], function () {
+    /**
+     *  profile - CRUD personal profile
+     */
+    Route::get(
+        '/profile',
+        [ProfileController::class, 'profile']
+    )->name('profile')->middleware('auth');
+
     /**
      *  users - CRUD users
      */

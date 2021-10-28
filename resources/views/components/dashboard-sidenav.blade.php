@@ -12,7 +12,7 @@
                     {{-- Account --}}
                     <div class="sb-sidenav-menu-heading">{{ trans('app.account') }}</div>
 
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="{{ route('profile') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                         {{ trans('app.profile') }}
                     </a>
