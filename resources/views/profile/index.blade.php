@@ -65,11 +65,21 @@
 
 @section('scripts')
     <script>
-        // front-end for avatar button
+        // onready function
         $(document).ready(function() {
+            // reset fileInput value onready
             $('#fileInput').val(null);
+
+            // set initial value for select country
+            var country_id = {!! json_encode($user->country_id) !!};
+            $('select[name=country_id]').val(country_id);
+
+            // set initial value for input birthday
+            var birthday = {!! json_encode($user->birthday->format('Y-m-d')) !!};
+            $('input[name=birthday]').val(birthday);
         });
 
+        // front-end for avatar button
         $(document).on("click", "#changeAvatarButton", function() {
             $("#inputFileButton").removeClass('hide');
             $("#cancelChangeAvatarButton").removeClass('hide');

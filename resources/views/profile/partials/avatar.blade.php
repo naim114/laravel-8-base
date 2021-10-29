@@ -1,7 +1,7 @@
 <div class="text-center">
-    <form method="POST" enctype="multipart/form-data" action="{{ route('avatar') }}">
+    <form method="POST" enctype="multipart/form-data" action="{{ route('profile.avatar') }}">
         @csrf
-        <img id="preview" class="rounded-circle img-thumbnail" width="150px" height="150px"
+        <img id="preview" class="rounded-circle img-thumbnail" style="height: 150px; width: 150px"
             src="{{ $user->avatar ?? url('assets/img/default-profile-picture.png') }}">
 
         <h5 class="text-muted mt-2">{{ $user->username ?? 'No Username' }}</h5>

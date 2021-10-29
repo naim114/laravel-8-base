@@ -20,10 +20,12 @@ class ProfileController extends Controller
         return view('profile.index', compact('user', 'countries'));
     }
 
+    /**
+     * Change avatar/profile picture for user
+     */
     public function storeAvatar(Request $request)
     {
         $user = Auth::user();
-        $countries = Country::all();
 
         $request->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -46,12 +48,39 @@ class ProfileController extends Controller
         }
 
         // updating user details in db
-        $user->avatar =  'upload/avatar/' . $fileName;
-        $user->save();
+        User::where('id', $user->id)
+            ->update([
+                'avatar' => 'upload/avatar/' . $fileName,
+            ]);
 
         // user activity log
         event(new UserActivityEvent($user, $request, 'Change avatar'));
 
         return back()->with('success', 'Avatar uploaded successfully!');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $update = $request->all();
+        unset($update['_token']);
+
+        // updating profile details in db
+
+        try {
+            User::where('id', Auth::user()->id)
+                ->update($update);
+        } catch (\Throwable $th) {
+            return back()->with('error', $th);
+        }
+
+        // user activity log
+        event(new UserActivityEvent(Auth::user(), $request, 'Update profile details'));
+
+        return back()->with('success', 'Profile updated successfully!');
+    }
+
+    public function updateAuth(Request $request)
+    {
+        # code...
     }
 }
