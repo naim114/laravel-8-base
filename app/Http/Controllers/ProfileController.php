@@ -42,9 +42,7 @@ class ProfileController extends Controller
         try {
             $request->avatar->move(public_path('upload/avatar'), $fileName);
         } catch (\Throwable $th) {
-            $successmsg = $th;
-
-            return view('profile.index', compact('user', 'countries', 'errormsg'));
+            return back()->with('error', $th);
         }
 
         // updating user details in db
@@ -54,9 +52,6 @@ class ProfileController extends Controller
         // user activity log
         event(new UserActivityEvent($user, $request, 'Change avatar'));
 
-        $successmsg = 'Avatar uploaded successfully!';
-
-        // TODO change this to redirect to route index with var
-        return view('profile.index', compact('user', 'countries', 'successmsg'));
+        return back()->with('success', 'Avatar uploaded successfully!');
     }
 }
