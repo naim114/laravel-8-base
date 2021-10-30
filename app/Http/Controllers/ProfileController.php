@@ -8,6 +8,7 @@ use App\Providers\UserActivityEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -65,7 +66,6 @@ class ProfileController extends Controller
         unset($update['_token']);
 
         // updating profile details in db
-
         try {
             User::where('id', Auth::user()->id)
                 ->update($update);
@@ -76,11 +76,44 @@ class ProfileController extends Controller
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Update profile details'));
 
-        return back()->with('success', 'Profile updated successfully!');
+        return back()->with('success', 'Profile details updated!');
     }
 
     public function updateAuth(Request $request)
     {
-        # code...
+        $update = $request->all();
+        $user = Auth::user();
+
+        // check if there is changes for username
+        if ($user->username != $update['username']) {
+            // check if username already taken
+            $check = User::where('username', $update['username'])->count();
+
+            if ($check > 0) {
+                return back()->with('error', 'Username entered are already taken');
+            }
+        }
+
+        // check if current password is correct
+        if ($user->email == $update['email'] && Hash::check($update['password'], $user->password)) {
+            // updating username and password
+
+            try {
+                User::where('id', $user->id)
+                    ->update([
+                        'username' => $update['username'],
+                        'password' => Hash::make($update['new_password']),
+                    ]);
+            } catch (\Throwable $th) {
+                return back()->with('error', $th);
+            }
+
+            // user activity log
+            event(new UserActivityEvent(Auth::user(), $request, 'Update login details'));
+
+            return back()->with('success', 'Login details updated!');
+        } else {
+            return back()->with('error', 'Email or password is incorrect');
+        }
     }
 }
