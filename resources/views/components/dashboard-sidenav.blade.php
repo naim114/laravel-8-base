@@ -17,7 +17,7 @@
                         {{ trans('app.profile') }}
                     </a>
 
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="{{ route('activity') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                         {{ trans('app.activity') }}
                     </a>

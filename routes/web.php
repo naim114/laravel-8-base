@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
@@ -49,7 +50,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
     /**
-     *  profile - CRUD personal profile
+     *  profile - manage personal profile
      */
     Route::get(
         '/profile',
@@ -72,7 +73,15 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('profile.update_auth')->middleware('auth');
 
     /**
-     *  users - CRUD users
+     *  activity - personal activity log
+     */
+    Route::get(
+        '/activity',
+        [ActivityLogController::class, 'index']
+    )->name('activity')->middleware('auth');
+
+    /**
+     *  users - manage users
      */
     Route::get(
         '/users',
