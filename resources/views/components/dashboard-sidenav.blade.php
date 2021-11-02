@@ -28,7 +28,7 @@
                     @endif
 
                     @if (has_permission('users.manage'))
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="{{ route('users') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             {{ trans('app.users') }}
                         </a>

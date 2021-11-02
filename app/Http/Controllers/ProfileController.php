@@ -18,7 +18,9 @@ class ProfileController extends Controller
 
         $countries = Country::all();
 
-        return view('profile.index', compact('user', 'countries'));
+        $birthday = $user->birthday == null ? null : $user->birthday->format('Y-m-d');
+
+        return view('profile.index', compact('user', 'countries', 'birthday'));
     }
 
     /**

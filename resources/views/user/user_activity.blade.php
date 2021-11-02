@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-master')
 
-@section('page-title', trans('app.activity'))
+@section('page-title', trans('app.users.activity'))
 
 @section('custom-head')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -9,8 +9,9 @@
 @section('user-name', Auth::user()->username)
 
 @section('breadcrumb')
-    <a href="{{ route('profile') }}">{{ trans('app.account') }}</a> /
-    <a>{{ trans('app.activity') }}</a>
+    <a href="{{ route('users') }}">{{ trans('app.administration') }}</a> /
+    <a href="{{ route('users') }}">{{ trans('app.users') }}</a> /
+    <a>{{ trans('app.users.activity') }}</a>
 @stop
 
 @section('content')
@@ -28,7 +29,7 @@
             <tbody>
                 @foreach ($activities as $activity)
                     <tr>
-                        <th scope="row">{{ $count++ }}</th>
+                        <td>{{ $count++ }}</td>
                         <td>{{ $activity->description }}</td>
                         <td>{{ $activity->ip_address }}</td>
                         <td>{{ $activity->user_agent }}</td>

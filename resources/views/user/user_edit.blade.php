@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-master')
 
-@section('page-title', trans('app.profile'))
+@section('page-title', trans('app.users.edit'))
 
 @section('custom-head')
     <style>
@@ -21,23 +21,18 @@
 @section('user-name', Auth::user()->username)
 
 @section('breadcrumb')
-    <a href="{{ route('profile') }}">{{ trans('app.account') }}</a> /
-    <a>{{ trans('app.profile') }}</a>
+    <a href="{{ route('users') }}">{{ trans('app.administration') }}</a> /
+    <a href="{{ route('users') }}">{{ trans('app.users') }}</a> /
+    <a>{{ trans('app.users.edit') }}</a>
 @stop
 
 @section('content')
     <div class="container">
-        @error('avatar')
-            <div class="alert alert-danger" role="alert">
-                {{ $message }}
-            </div>
-        @enderror
-
         <div class="row">
             <div class="col-md-4 col-sm-6 pt-2 pb-2">
                 <div class="card">
                     <div class="card-body">
-                        @include('profile.partials.avatar')
+                        @include('user.partials.edit.avatar')
                     </div>
                 </div>
             </div>
@@ -47,15 +42,7 @@
                         <h5>Profile details</h5>
                     </div>
                     <div class="card-body">
-                        @include('profile.partials.details')
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Login details</h5>
-                    </div>
-                    <div class="card-body">
-                        @include('profile.partials.auth')
+                        @include('user.partials.edit.details')
                     </div>
                 </div>
             </div>

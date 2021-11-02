@@ -34,7 +34,12 @@ return [
     'profile' => 'Profile',
     'activity' => 'Activity Log',
     'administration' => 'Administration',
+
     'users' => 'Users',
+    'users.activity' => 'User Activity',
+    'users.view' => 'View User',
+    'users.edit' => 'Edit User',
+
     'activity-log' => 'Users Activities',
     'roles-permissions' => 'Roles & Permissions',
     'roles' => 'Roles',

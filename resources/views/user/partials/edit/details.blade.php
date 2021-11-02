@@ -3,6 +3,10 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group mb-3">
+                <label>Username</label>
+                <input type="text" value="{{ $user->username }}" class="form-control" disabled>
+            </div>
+            <div class="form-group mb-3">
                 <label for="full_name">Full Name</label>
                 <input type="text" name="full_name" value="{{ $user->full_name }}" class="form-control"
                     placeholder="Enter Full Name">
@@ -23,6 +27,10 @@
             </div>
         </div>
         <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label>Email</label>
+                <input type="text" value="{{ $user->email }}" class="form-control" disabled>
+            </div>
             <div class="form-group mb-3">
                 <label for="birthday">Date of Birth (MM-DD-YYYY)</label>
                 <input type="date" id="bithdayInput" name="birthday" value="{{ $birthday }}" class="form-control"

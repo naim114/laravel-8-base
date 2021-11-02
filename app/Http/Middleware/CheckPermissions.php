@@ -28,7 +28,8 @@ class CheckPermissions
             ->count();
 
         if ($query == null) {
-            abort(403, "Forbidden.");
+            // abort(403, "Forbidden.");
+            return back();
         }
 
         return $next($request);
