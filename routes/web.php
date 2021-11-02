@@ -90,13 +90,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get(
         '/users-activity/{id}',
-        [UsersController::class, 'activityLog']
+        [UsersController::class, 'activity']
     )->name('users.user_activity')->middleware('permissions:users.manage');
 
     Route::get(
         '/users-view/{action}/{id}',
         [UsersController::class, 'view']
     )->name('users.view')->middleware('permissions:users.manage');
+
+    Route::post(
+        '/users-avatar',
+        [UsersController::class, 'avatar']
+    )->name('users.avatar')->middleware('permissions:users.manage');
 
     Route::post(
         '/users-edit',

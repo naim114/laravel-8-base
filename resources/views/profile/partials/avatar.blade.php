@@ -13,7 +13,7 @@
 
         <p id="guideMsg" class="text-secondary hide">* Upload image and save changes to change profile picture</p>
 
-        <input type="file" id="fileInput" name="avatar" class="file hide" accept="image/*">
+        <input type="file" id="fileInput" name="avatar" class="file hide" accept="image/*" required>
         <input type="text" class="form-control hide" disabled placeholder="Upload File" id="file">
         <button type="button" id="inputFileButton" class="browse btn btn-secondary btn-block mt-3 w-100 hide">
             <i class="fa fa-upload pr-2 pl-2"></i>

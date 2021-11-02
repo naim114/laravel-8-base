@@ -1,10 +1,11 @@
-<form method="POST" action="{{ route('profile.update_profile') }}">
+<form method="POST" action="{{ route('users.edit') }}">
     @csrf
     <div class="row">
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label>Username</label>
                 <input type="text" value="{{ $user->username }}" class="form-control" disabled>
+                <input type="text" name="id" value="{{ $user->id }}" class="form-control hide" hidden>
             </div>
             <div class="form-group mb-3">
                 <label for="full_name">Full Name</label>

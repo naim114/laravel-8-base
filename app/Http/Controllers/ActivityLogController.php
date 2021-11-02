@@ -10,7 +10,7 @@ class ActivityLogController extends Controller
 {
     public function index()
     {
-        $activities = UserActivity::where('user_id', Auth::user()->id)->get();
+        $activities = UserActivity::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
         $count = 1;
 
