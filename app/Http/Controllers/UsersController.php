@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserActivity;
 use App\Models\Country;
 use App\Providers\UserActivityEvent;
+use App\Support\Enum\UserStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -24,6 +25,15 @@ class UsersController extends Controller
     public function activity(Request $request)
     {
         $activities = UserActivity::where('user_id', $request->id)->orderBy('created_at', 'desc')->get();
+
+        $count = 1;
+
+        return view('user.user_activity', compact('activities', 'count'));
+    }
+
+    public function activityAll(Request $request)
+    {
+        $activities = UserActivity::all();
 
         $count = 1;
 
@@ -104,5 +114,43 @@ class UsersController extends Controller
         event(new UserActivityEvent(Auth::user(), $request, 'Edit user ' . $user->email . '(id: ' . $user->id . ')' . ' profile details'));
 
         return back()->with('success', 'Profile details updated!');
+    }
+
+    public function ban(Request $request)
+    {
+        $user = User::where('id', $request->id)->first();
+
+        // change user status in db
+        try {
+            User::where('id', $user->id)
+                ->update([
+                    'status' => $request->status,
+                ]);
+        } catch (\Throwable $th) {
+            return back()->with('error', $th);
+        }
+
+        // user activity log
+        event(new UserActivityEvent(Auth::user(), $request, 'Change user ' . $user->email . '(id: ' . $user->id . ')' . ' to ' . $request->status));
+
+        return back()->with('success', 'User status has been changed to ' . $request->status);
+    }
+
+    public function delete(Request $request)
+    {
+        $user = User::where('id', $request->id)->first();
+
+        // soft delete in db
+        try {
+            User::where('id', $user->id)
+                ->delete();
+        } catch (\Throwable $th) {
+            return back()->with('error', $th);
+        }
+
+        // user activity log
+        event(new UserActivityEvent(Auth::user(), $request, 'Delete user ' . $user->email . '(id: ' . $user->id . ')'));
+
+        return back()->with('success', 'User' .  $user->username . ' has been successfully deleted');
     }
 }

@@ -21,6 +21,7 @@ class AuthTables extends Migration
             $table->string('description')->nullable();
             $table->boolean('removable')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         // Create table for storing permissions
@@ -31,6 +32,7 @@ class AuthTables extends Migration
             $table->string('description')->nullable();
             $table->boolean('removable')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         // Create table for associating permissions to roles (Many-to-Many)

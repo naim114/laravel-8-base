@@ -89,11 +89,6 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('users')->middleware('permissions:users.manage');
 
     Route::get(
-        '/users-activity/{id}',
-        [UsersController::class, 'activity']
-    )->name('users.user_activity')->middleware('permissions:users.manage');
-
-    Route::get(
         '/users-view/{action}/{id}',
         [UsersController::class, 'view']
     )->name('users.view')->middleware('permissions:users.manage');
@@ -107,4 +102,25 @@ Route::group(['middleware' => ['auth']], function () {
         '/users-edit',
         [UsersController::class, 'edit']
     )->name('users.edit')->middleware('permissions:users.manage');
+
+    Route::post(
+        '/users-ban',
+        [UsersController::class, 'ban']
+    )->name('users.ban')->middleware('permissions:users.manage');
+
+    Route::post(
+        '/users-delete',
+        [UsersController::class, 'delete']
+    )->name('users.delete')->middleware('permissions:users.manage');
+
+    // single user
+    Route::get(
+        '/users-activity/{id}',
+        [UsersController::class, 'activity']
+    )->name('users.user_activity')->middleware('permissions:users.activity');
+
+    Route::get(
+        '/users-activity',
+        [UsersController::class, 'activityAll']
+    )->name('users.users_activity')->middleware('permissions:users.activity');
 });

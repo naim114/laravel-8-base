@@ -38,17 +38,23 @@
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-h fa-fw"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item"
-                                        href="{{ route('users.user_activity', ['id' => $user->id]) }}">Activity
-                                        Log</a>
-                                </li>
+                                @if (has_permission('users.activity'))
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('users.user_activity', ['id' => $user->id]) }}">Activity
+                                            Log</a>
+                                    </li>
+                                @endif
                                 <li><a class="dropdown-item"
                                         href="{{ route('users.view', ['action' => 'profile', 'id' => $user->id]) }}">View
                                         User</a></li>
-                                <li><a class="dropdown-item"
+                                <li><a class="dropdown-item "
                                         href="{{ route('users.view', ['action' => 'edit', 'id' => $user->id]) }}">Edit
                                         User</a></li>
-                                <li><a class="dropdown-item text-danger" href="#">Delete User</a></li>
+                                <li><button class="dropdown-item text-warning banButton" data-id="{{ $user->id }}"
+                                        data-username="{{ $user->username }}"
+                                        data-action="{{ $user->status == 'Active' ? 'Banned' : 'Active' }}"><b>{{ $user->status == 'Active' ? 'Ban User' : 'Activate User' }}</b></button>
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#"><b>Delete User</b></a></li>
                             </ul>
                         </td>
                     </tr>
@@ -56,4 +62,32 @@
             </tbody>
         </table>
     </div>
+
+    {{-- Modal --}}
+    <!-- Ban/Unban Modal -->
+    @include('user.partials.ban')
+
+    <!-- TODO Delete Modal -->
 @stop
+
+@section('scripts')
+    <script>
+        $(".banButton").click(function() {
+            $('#banModal').modal('show');
+
+            var username = $(this).data('username');
+            var action = $(this).data('action');
+            var id = $(this).data('id');
+
+            $('#titleBanModal').text(action == 'Banned' ? 'Ban user' : 'Activate user');
+            $('#textBanModal').text('Are you sure you want to change ' + username + ' status to ' + action);
+
+            $('#idBanModal').val(id);
+            $('#statusBanModal').val(action);
+        });
+
+        $(".closeBanModal").click(function() {
+            $('#banModal').modal('hide');
+        });
+    </script>
+@endsection
