@@ -54,7 +54,9 @@
                                         data-username="{{ $user->username }}"
                                         data-action="{{ $user->status == 'Active' ? 'Banned' : 'Active' }}"><b>{{ $user->status == 'Active' ? 'Ban User' : 'Activate User' }}</b></button>
                                 </li>
-                                <li><a class="dropdown-item text-danger" href="#"><b>Delete User</b></a></li>
+                                <li><button class="dropdown-item text-danger deleteButton"
+                                        data-id="{{ $user->id }}"><b>Delete
+                                            User</b></button></li>
                             </ul>
                         </td>
                     </tr>
@@ -67,11 +69,37 @@
     <!-- Ban/Unban Modal -->
     @include('user.partials.ban')
 
-    <!-- TODO Delete Modal -->
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="POST" action="{{ route('users.delete') }}">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">
+                            Delete Account
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this account? To retrieve this data back please contact the
+                        developers.
+                        <input id="idDeleteModal" name="id" hidden />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closeDeleteModal" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @stop
 
 @section('scripts')
     <script>
+        // ban modal
         $(".banButton").click(function() {
             $('#banModal').modal('show');
 
@@ -88,6 +116,19 @@
 
         $(".closeBanModal").click(function() {
             $('#banModal').modal('hide');
+        });
+
+        // delete modal
+        $(".deleteButton").click(function() {
+            $('#deleteModal').modal('show');
+
+            var id = $(this).data('id');
+            $('#idDeleteModal').val(id);
+        });
+
+
+        $(".closeDeleteModal").click(function() {
+            $('#deleteModal').modal('hide');
         });
     </script>
 @endsection

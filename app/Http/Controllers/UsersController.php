@@ -151,6 +151,6 @@ class UsersController extends Controller
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Delete user ' . $user->email . '(id: ' . $user->id . ')'));
 
-        return back()->with('success', 'User' .  $user->username . ' has been successfully deleted');
+        return back()->with('success', 'User ' .  $user->username . ' has been successfully deleted');
     }
 }
