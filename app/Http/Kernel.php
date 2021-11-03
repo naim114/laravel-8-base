@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CheckPermissions;
+use App\Http\Middleware\CheckStatus;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -56,6 +57,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'permissions' => CheckPermissions::class,
+        'status' => CheckStatus::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

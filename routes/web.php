@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,22 +19,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ======================================================================================== //
-// Index Routes
-// defining the index page
-// ======================================================================================== //
-
 /**
- *  Defining the index route
+ *  ban - route to redirect to if user status is Banned
  */
-Route::get(
-    '/',
-    [DashboardController::class, 'index']
-)->name('dashboard');
-
-Route::get('/test', function () {
-    return view('dashboard.admin');
-});
+Route::get('/ban', function () {
+    return view('errors.ban');
+})->name('ban');
 
 // ======================================================================================== //
 // Auth Routes
@@ -48,7 +39,16 @@ Auth::routes();
 // only authorised user can access these route
 // ======================================================================================== //
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'status']], function () {
+    /**
+     *  dashboard - index route
+     */
+    Route::get(
+        '/',
+        [DashboardController::class, 'index']
+    )->name('dashboard');
+
+
     /**
      *  profile - manage personal profile
      */

@@ -33,7 +33,7 @@ read https://dev.to/kingsconsult/laravel-8-events-and-listeners-with-practical-e
 
 php artisan make:middleware CheckPermission
 
-register it under routemiddleware
+register it under routemiddleware at Kernel
 
 add parameter permission name to middleware
 
