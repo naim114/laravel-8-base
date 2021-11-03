@@ -37,7 +37,9 @@ class UsersController extends Controller
 
         $count = 1;
 
-        return view('user.user_activity', compact('activities', 'count'));
+        $all = true;
+
+        return view('user.user_activity', compact('activities', 'count', 'all'));
     }
 
     public function view(Request $request)

@@ -35,7 +35,7 @@
                     @endif
 
                     @if (has_permission('users.activity'))
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="{{ route('users.users_activity') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-list-ul"></i></div>
                             {{ trans('app.activity-log') }}
                         </a>

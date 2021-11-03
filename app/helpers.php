@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -32,5 +33,15 @@ if (!function_exists('has_permission')) {
         }
 
         return true;
+    }
+}
+
+if (!function_exists('get_user_detail')) {
+    function get_user_detail($id, $detail)
+    {
+        $user = User::where('id', $id)
+            ->first();
+
+        echo $user->$detail;
     }
 }

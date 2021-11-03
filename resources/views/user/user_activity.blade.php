@@ -21,6 +21,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Description</th>
+                    @if (isset($all))
+                        <th scope="col">User</th>
+                    @endif
                     <th scope="col">IP address</th>
                     <th scope="col">User agent</th>
                     <th scope="col">Time</th>
@@ -31,6 +34,11 @@
                     <tr>
                         <td>{{ $count++ }}</td>
                         <td>{{ $activity->description }}</td>
+                        @if (isset($all))
+                            <td><a
+                                    href="{{ route('users.view', ['action' => 'profile', 'id' => $activity->user_id]) }}">{{ get_user_detail($activity->user_id, 'username') }}</a>
+                            </td>
+                        @endif
                         <td>{{ $activity->ip_address }}</td>
                         <td>{{ $activity->user_agent }}</td>
                         <td>{{ $activity->created_at }}</td>
