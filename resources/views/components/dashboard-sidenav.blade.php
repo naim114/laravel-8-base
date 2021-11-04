@@ -53,7 +53,8 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 @if (has_permission('roles.manage'))
-                                    <a class="nav-link" href="layout-static.html">{{ trans('app.roles') }}</a>
+                                    <a class="nav-link"
+                                        href="{{ route('roles') }}">{{ trans('app.roles') }}</a>
                                 @endif
                                 @if (has_permission('permissions.manage'))
                                     <a class="nav-link"

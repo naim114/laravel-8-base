@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
@@ -119,8 +120,32 @@ Route::group(['middleware' => ['auth', 'status']], function () {
         [UsersController::class, 'activity']
     )->name('users.user_activity')->middleware('permissions:users.activity');
 
+    // all user
     Route::get(
         '/users-activity',
         [UsersController::class, 'activityAll']
     )->name('users.users_activity')->middleware('permissions:users.activity');
+
+    /**
+     *  roles - manage roles
+     */
+    Route::get(
+        '/roles',
+        [RoleController::class, 'index']
+    )->name('roles')->middleware('permissions:roles.manage');
+
+    Route::post(
+        '/roles-add',
+        [RoleController::class, 'add']
+    )->name('roles.add')->middleware('permissions:roles.manage');
+
+    Route::post(
+        '/roles-edit',
+        [RoleController::class, 'edit']
+    )->name('roles.edit')->middleware('permissions:roles.manage');
+
+    Route::post(
+        '/roles-delete',
+        [RoleController::class, 'delete']
+    )->name('roles.delete')->middleware('permissions:roles.manage');
 });
