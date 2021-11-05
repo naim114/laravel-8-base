@@ -43,6 +43,7 @@ return [
     'activity-log' => 'Users Activities',
     'roles-permissions' => 'Roles & Permissions',
     'roles' => 'Roles',
+    'role-list' => 'Roles List',
     'permissions' => 'Permissions',
     'settings' => 'Settings',
     'general' => 'General',

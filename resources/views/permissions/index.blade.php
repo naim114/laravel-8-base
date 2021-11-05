@@ -49,7 +49,8 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <a href="" class="dropdown-item editButton">
+                                    <a href="{{ route('permissions_role', ['id' => $permission->id]) }}"
+                                        class="dropdown-item">
                                         Edit Role List
                                     </a>
                                 </li>

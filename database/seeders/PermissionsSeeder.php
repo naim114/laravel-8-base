@@ -16,8 +16,6 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        // $adminRole = Role::where('name', 'Admin')->first();
-
         $permissions[] = Permission::create([
             'name' => 'users.manage',
             'display_name' => 'Manage Users',

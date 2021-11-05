@@ -172,4 +172,19 @@ Route::group(['middleware' => ['auth', 'status']], function () {
         '/permissions-delete',
         [PermissionController::class, 'delete']
     )->name('permissions.delete')->middleware('permissions:permissions.manage');
+
+    Route::get(
+        '/permissions-role/{id}',
+        [PermissionController::class, 'permission_role']
+    )->name('permissions_role')->middleware('permissions:permissions.manage');
+
+    Route::post(
+        '/permissions-role-add',
+        [PermissionController::class, 'permission_role_add']
+    )->name('permissions_role.add')->middleware('permissions:permissions.manage');
+
+    Route::post(
+        '/permissions-role-delete',
+        [PermissionController::class, 'permission_role_delete']
+    )->name('permissions_role.delete')->middleware('permissions:permissions.manage');
 });
