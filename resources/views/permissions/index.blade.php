@@ -1,19 +1,24 @@
 @extends('layouts.dashboard-master')
 
-@section('page-title', trans('app.roles'))
+@section('page-title', trans('app.permissions'))
 @section('user-name', Auth::user()->username)
 
 @section('breadcrumb')
     <a href="{{ route('roles') }}">{{ trans('app.roles-permissions') }}</a> /
-    <a>{{ trans('app.roles') }}</a>
+    <a>{{ trans('app.permissions') }}</a>
 @stop
 
 @section('content')
     <div class="container">
+        @error('name')
+            <div class="alert alert-danger" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
         <button class="btn btn-primary mb-2 addButton">
-            + Add Roles
+            + Add Permission
         </button>
-        <table id="rolesTable" class="table table-striped table-hover table-responsive">
+        <table id="permissionsTable" class="table table-striped table-hover table-responsive">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
@@ -26,28 +31,33 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($roles as $role)
+                @foreach ($permissions as $permission)
                     <tr>
                         <th scope="row">{{ $count++ }}</th>
-                        <td>{{ $role->name }}</td>
-                        <td>{{ $role->display_name }}</td>
-                        <td>{{ $role->description }}</td>
-                        <td>{{ $role->removable ? 'Yes' : 'No' }}</td>
-                        <td>{{ $role->created_at }}</td>
+                        <td>{{ $permission->name }}</td>
+                        <td>{{ $permission->display_name }}</td>
+                        <td>{{ $permission->description }}</td>
+                        <td>{{ $permission->removable ? 'Yes' : 'No' }}</td>
+                        <td>{{ $permission->created_at }}</td>
                         <td>
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false"><i class="fas fa-ellipsis-h fa-fw"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <button data-role="{{ $role }}" class="dropdown-item editButton">
-                                        Edit Role
+                                    <button data-permission="{{ $permission }}" class="dropdown-item editButton">
+                                        Edit Permission
                                     </button>
                                 </li>
-                                @if ($role->removable)
+                                <li>
+                                    <a href="" class="dropdown-item editButton">
+                                        Edit Role List
+                                    </a>
+                                </li>
+                                @if ($permission->removable)
                                     <li>
-                                        <button data-role="{{ $role }}"
+                                        <button data-permission="{{ $permission }}"
                                             class="dropdown-item text-danger deleteButton">
-                                            Delete Role
+                                            Delete Permission
                                         </button>
                                     </li>
                                 @endif
@@ -59,15 +69,15 @@
         </table>
     </div>
 
-    {{-- Modals --}}
+    {{-- Modal --}}
     {{-- Add Modal --}}
-    @include('roles.partials.add')
+    @include('permissions.partials.add')
 
     {{-- Edit Modal --}}
-    @include('roles.partials.edit')
+    @include('permissions.partials.edit')
 
     {{-- Delete Modal --}}
-    @include('roles.partials.delete')
+    @include('permissions.partials.delete')
 
 @stop
 
@@ -91,12 +101,18 @@
         $(".editButton").click(function() {
             $('#editModal').modal('show');
 
-            var role = $(this).data('role');
+            var permission = $(this).data('permission');
 
-            $('#editModalName').val(role.name);
-            $('#editModalId').val(role.id);
-            $('#editModalDisplayName').val(role.display_name);
-            $('#editModalDescription').val(role.description);
+            $('#editModalName').val(permission.name);
+            $('#editModalId').val(permission.id);
+            $('#editModalDisplayName').val(permission.display_name);
+            $('#editModalDescription').val(permission.description);
+
+            if (!permission.removable) {
+                $("#editModalName").prop('disabled', true);
+            } else {
+                $("#editModalName").prop('disabled', false);
+            }
         });
 
         $(".closeEditModal").click(function() {
@@ -107,10 +123,10 @@
         $(".deleteButton").click(function() {
             $('#deleteModal').modal('show');
 
-            var role = $(this).data('role');
+            var permission = $(this).data('permission');
 
-            $('#deleteModalId').val(role.id);
-            $('#textBanModal').text('Are you sure you want to delete role ' + role.name +
+            $('#deleteModalId').val(permission.id);
+            $('#textBanModal').text('Are you sure you want to delete permission ' + permission.name +
                 ' ?');
         });
 

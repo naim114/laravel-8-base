@@ -58,7 +58,7 @@
                                 @endif
                                 @if (has_permission('permissions.manage'))
                                     <a class="nav-link"
-                                        href="layout-sidenav-light.html">{{ trans('app.permissions') }}</a>
+                                        href="{{ route('permissions') }}">{{ trans('app.permissions') }}</a>
                                 @endif
                             </nav>
                         </div>

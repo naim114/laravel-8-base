@@ -30,7 +30,7 @@ class RoleController extends Controller
         }
 
         // user activity log
-        event(new UserActivityEvent(Auth::user(), $request, 'Add role '));
+        event(new UserActivityEvent(Auth::user(), $request, 'Add role'));
 
         return back()->with('success', 'Role successfully added!');
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestController;
@@ -148,4 +149,27 @@ Route::group(['middleware' => ['auth', 'status']], function () {
         '/roles-delete',
         [RoleController::class, 'delete']
     )->name('roles.delete')->middleware('permissions:roles.manage');
+
+    /**
+     *  permissions - manage permissions
+     */
+    Route::get(
+        '/permissions',
+        [PermissionController::class, 'index']
+    )->name('permissions')->middleware('permissions:permissions.manage');
+
+    Route::post(
+        '/permissions-add',
+        [PermissionController::class, 'add']
+    )->name('permissions.add')->middleware('permissions:permissions.manage');
+
+    Route::post(
+        '/permissions-edit',
+        [PermissionController::class, 'edit']
+    )->name('permissions.edit')->middleware('permissions:permissions.manage');
+
+    Route::post(
+        '/permissions-delete',
+        [PermissionController::class, 'delete']
+    )->name('permissions.delete')->middleware('permissions:permissions.manage');
 });
