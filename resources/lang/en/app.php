@@ -46,5 +46,5 @@ return [
     'role-list' => 'Roles List',
     'permissions' => 'Permissions',
     'settings' => 'Settings',
-    'general' => 'General',
+    'general' => 'General Settings',
 ];

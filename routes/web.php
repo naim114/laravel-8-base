@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,7 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     Route::get(
         '/',
         [DashboardController::class, 'index']
-    )->name('dashboard');
+    )->name('dashboard')->middleware('auth');;
 
 
     /**
@@ -187,4 +188,17 @@ Route::group(['middleware' => ['auth', 'status']], function () {
         '/permissions-role-delete',
         [PermissionController::class, 'permission_role_delete']
     )->name('permissions_role.delete')->middleware('permissions:permissions.manage');
+
+    /**
+     *  settings - manage settings
+     */
+    Route::get(
+        '/settings',
+        [SettingsController::class, 'index']
+    )->name('settings')->middleware('permissions:settings.general');
+
+    Route::post(
+        '/settings-app-name',
+        [SettingsController::class, 'change_app_name']
+    )->name('settings.app_name')->middleware('permissions:settings.general');
 });
