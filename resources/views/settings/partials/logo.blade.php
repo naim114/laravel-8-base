@@ -2,7 +2,8 @@
     @csrf
     <h5>Logo</h5>
     <div class="text-center">
-        <img id="previewLogo" class="img-thumbnail mt-3 mb-3" src="{{ asset(trans('app.logo')) }}">
+        <img id="previewLogo" class="img-thumbnail mt-3 mb-3" src="{{ asset(trans('app.logo')) }}"
+            style="height: 200px">
         <button type="button" id="changeLogoButton" class="btn btn-secondary btn-block mt-3 w-100">
             <i class="fa fa-camera pr-2 pl-2"></i>
             Change Logo
