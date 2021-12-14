@@ -30,55 +30,14 @@
         <div class="row">
             <div class="col-md-6 mt-2">
                 <div class="card p-4">
-                    <form method="POST" action="{{ route('settings.update') }}">
-                        @csrf
-                        <div class="form-group">
-                            <h5>Application Name</h5>
-                            <input type="text" name="app_name" class="form-control mt-3 mb-3"
-                                placeholder="Enter Application Name" value="{{ trans('app.app-name') }}">
-                            <h5>Copyright</h5>
-                            <input type="text" name="copyright" class="form-control mt-3 mb-3"
-                                placeholder="Enter Application Name" value="{{ trans('app.copyright') }}">
-                            <h5>Privacy & Policy URL</h5>
-                            <input type="text" name="privacy_policy" class="form-control mt-3 mb-3"
-                                placeholder="Enter Application Name" value="{{ trans('app.privacy-policy') }}">
-                            <h5>Terms & Conditions URL</h5>
-                            <input type="text" name="terms_conditions" class="form-control mt-3 mb-3"
-                                placeholder="Enter Application Name" value="{{ trans('app.terms-conditions') }}">
-                            <div class="d-flex flex-row-reverse mt-3">
-                                <button type="submit" class="btn btn-primary float-right">
-                                    Save Changes
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    @include('settings.partials.general')
                 </div>
             </div>
             <div class="col-md-6 mt-2">
                 <div class="card p-4">
                     <div class="form-group">
-                        <h5>Logo</h5>
-                        <div class="text-center">
-                            <img id="previewLogo" class="img-thumbnail mt-3 mb-3" src="{{ asset(trans('app.logo')) }}">
-                            <button type="button" id="changeLogoButton" class="btn btn-secondary btn-block mt-3 w-100">
-                                <i class="fa fa-camera pr-2 pl-2"></i>
-                                Change Logo
-                            </button>
-
-                            <p id="guideMsg" class="text-secondary hide">* Upload image and update logo</p>
-
-                            <input type="file" id="fileInputLogo" name="logo" class="fileLogo hide" accept="image/*"
-                                required>
-                            <input type="text" class="form-control hide" disabled placeholder="Upload File" id="fileLogo">
-                            <button type="button" id="inputFileButton"
-                                class="browse btn btn-secondary btn-block mt-3 w-100 hide">
-                                <i class="fa fa-upload pr-2 pl-2"></i>
-                                Upload Image
-                            </button>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block mt-3 mb-5 w-100">
-                            Update Logo
-                        </button>
+                        @include('settings.partials.logo')
+                        @include('settings.partials.favicon')
                     </div>
                 </div>
             </div>
@@ -92,44 +51,82 @@
         $(document).ready(function() {
             // reset fileInputLogo value onready
             $('#fileInputLogo').val(null);
-
-            // reset fileInputFavicon value onready
             $('#fileInputFavicon').val(null);
         });
 
         // front-end for logo button
         $(document).on("click", "#changeLogoButton", function() {
-            $("#inputFileButton").removeClass('hide');
+            $("#inputFileButtonLogo").removeClass('hide');
             $("#cancelChangeLogoButton").removeClass('hide');
             $("#submitLogoButton").removeClass('hide');
-            $("#guideMsg").removeClass('hide');
+            $("#guideMsgLogo").removeClass('hide');
 
             $("#changeLogoButton").addClass('hide');
         });
 
         $(document).on("click", "#cancelChangeLogoButton", function() {
-            $("#inputFileButton").addClass('hide');
+            $("#inputFileButtonLogo").addClass('hide');
             $("#cancelChangeLogoButton").addClass('hide');
             $("#submitLogoButton").addClass('hide');
-            $("#guideMsg").addClass('hide');
+            $("#guideMsgLogo").addClass('hide');
 
             $("#changeLogoButton").removeClass('hide');
             $('#fileInputLogo').val(null);
         });
 
-        $(document).on("click", ".browse", function() {
+        $(document).on("click", ".browseLogo", function() {
             var fileLogo = $(this).parents().find(".fileLogo");
             fileLogo.trigger("click");
         });
 
         $('#fileInputLogo').change(function(e) {
             var fileName = e.target.files[0].name;
+            console.log(fileName);
             $("#fileLogo").val(fileName);
 
             var reader = new FileReader();
             reader.onload = function(e) {
                 // get loaded data and render thumbnail.
                 document.getElementById("previewLogo").src = e.target.result;
+            };
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        });
+
+        // front-end for favicon button
+        $(document).on("click", "#changeFaviconButton", function() {
+            $("#inputFileButtonFavicon").removeClass('hide');
+            $("#cancelChangeFaviconButton").removeClass('hide');
+            $("#submitFaviconButton").removeClass('hide');
+            $("#guideMsgFavicon").removeClass('hide');
+
+            $("#changeFaviconButton").addClass('hide');
+        });
+
+        $(document).on("click", "#cancelChangeFaviconButton", function() {
+            $("#inputFileButtonFavicon").addClass('hide');
+            $("#cancelChangeFaviconButton").addClass('hide');
+            $("#submitFaviconButton").addClass('hide');
+            $("#guideMsgFavicon").addClass('hide');
+
+            $("#changeFaviconButton").removeClass('hide');
+            $('#fileInputFavicon').val(null);
+        });
+
+        $(document).on("click", ".browseFavicon", function() {
+            var fileFavicon = $(this).parents().find(".fileFavicon");
+            fileFavicon.trigger("click");
+        });
+
+        $('#fileInputFavicon').change(function(e) {
+            var fileName = e.target.files[0].name;
+            console.log(fileName);
+            $("#fileFavicon").val(fileName);
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("previewFavicon").src = e.target.result;
             };
             // read the image file as a data URL.
             reader.readAsDataURL(this.files[0]);

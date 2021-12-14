@@ -201,4 +201,14 @@ Route::group(['middleware' => ['auth', 'status']], function () {
         '/settings-update',
         [SettingsController::class, 'update']
     )->name('settings.update')->middleware('permissions:settings.general');
+
+    Route::post(
+        '/settings-logo',
+        [SettingsController::class, 'logo']
+    )->name('settings.logo')->middleware('permissions:settings.general');
+
+    Route::post(
+        '/settings-favicon',
+        [SettingsController::class, 'favicon']
+    )->name('settings.favicon')->middleware('permissions:settings.general');
 });

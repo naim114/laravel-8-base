@@ -46,15 +46,15 @@ class ProfileController extends Controller
         // storing file in public/upload/avatar
         try {
             $request->avatar->move(public_path('upload/avatar'), $fileName);
+
+            // updating user details in db
+            User::where('id', $user->id)
+                ->update([
+                    'avatar' => 'upload/avatar/' . $fileName,
+                ]);
         } catch (\Throwable $th) {
             return back()->with('error', $th);
         }
-
-        // updating user details in db
-        User::where('id', $user->id)
-            ->update([
-                'avatar' => 'upload/avatar/' . $fileName,
-            ]);
 
         // user activity log
         event(new UserActivityEvent($user, $request, 'Change avatar'));
