@@ -61,6 +61,10 @@
             var country_id = {!! json_encode($user->country_id) !!};
             $('select[name=country_id]').val(country_id);
 
+            // set initial value for select role
+            var role_id = {!! json_encode($user->role_id) !!};
+            $('select[name=role_id]').val(role_id);
+
             // set initial value for input birthday
             var birthday = {!! json_encode($birthday) !!};
 

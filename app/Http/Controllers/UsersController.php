@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserActivity;
 use App\Models\Country;
+use App\Models\Role;
 use App\Providers\UserActivityEvent;
 use App\Support\Enum\UserStatus;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role_id', '!=', 1)->get();
 
         $count = 1;
 
@@ -52,10 +53,12 @@ class UsersController extends Controller
 
         $birthday = $user->birthday == null ? null : $user->birthday->format('Y-m-d');
 
+        $roles = Role::where('id', '!=', 1)->get();
+
         if ($request->action == "profile") {
             return view('user.user_profile', compact('user', 'birthday', 'country'));
         } elseif ($request->action == "edit") {
-            return view('user.user_edit', compact('user', 'birthday', 'countries'));
+            return view('user.user_edit', compact('user', 'birthday', 'countries', 'roles'));
         }
 
         return back();

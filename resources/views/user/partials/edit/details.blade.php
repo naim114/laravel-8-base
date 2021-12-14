@@ -42,6 +42,15 @@
                 <input type="text" name="address" value="{{ $user->address }}" class="form-control"
                     placeholder="Enter Address">
             </div>
+            <div class="form-group mb-3">
+                <label for="role_id">Role</label>
+                <select name="role_id" class="form-control" required>
+                    <option value="{{ null }}">Please select a role</option>
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     </div>
     <div class="d-flex flex-row-reverse">

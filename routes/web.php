@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('users')->middleware('permissions:users.manage');
 
     Route::get(
-        '/users-view/{action}/{id}',
+        '/users/{action}/{id}',
         [UsersController::class, 'view']
     )->name('users.view')->middleware('permissions:users.manage');
 
