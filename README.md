@@ -6,8 +6,19 @@ php artisan make:migration ObjectName
 ### Run migration w/ seeders
 php artisan migrate:refresh --seed
 
+(make sure to enable/uncomment extension=fileinfo, extension=pdo_mysql at php.ini)
+
 to revert back migration
 php artisan migrate:reset 
+
+#### Model
+if you would like to generate a database migration when you generate the model, you may use the --migration or -m option:
+
+php artisan make:model ObjectName --migration
+
+(more flag)
+--seed
+--controller
 
 ### Seeders
 dummy data for testing

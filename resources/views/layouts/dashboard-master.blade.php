@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>@yield('page-title') - {{ config('app.name') }}</title>
-    <link rel="icon" type="image/png" href="{{ trans('app.favicon') }}">
+    <title>@yield('page-title') - {{ trans('app.app-name') }}</title>
+    <link rel="icon" type="image/png" href="{{ asset(trans('app.favicon')) }}">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>

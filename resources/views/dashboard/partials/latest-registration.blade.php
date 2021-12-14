@@ -8,7 +8,7 @@
                         <div class="row">
                             <div class="col-3">
                                 <img id="preview" class="rounded-circle img-thumbnail" style="height: 50px; width: 50px"
-                                    src="{{ $user->avatar ?? url('assets/img/default-profile-picture.png') }}">
+                                    src="{{ $user->avatar ?? asset(url('assets/img/default-profile-picture.png')) }}">
                             </div>
                             <div class="col-9">
                                 <h5>{{ $user->username }}</h5>

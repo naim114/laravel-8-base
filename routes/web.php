@@ -198,7 +198,7 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('settings')->middleware('permissions:settings.general');
 
     Route::post(
-        '/settings-app-name',
-        [SettingsController::class, 'change_app_name']
-    )->name('settings.app_name')->middleware('permissions:settings.general');
+        '/settings-update',
+        [SettingsController::class, 'update']
+    )->name('settings.update')->middleware('permissions:settings.general');
 });

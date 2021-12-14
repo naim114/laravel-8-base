@@ -1,11 +1,15 @@
 <?php
 
+use App\Models\Settings;
+
 return [
     // general
-    'favicon' => 'assets/icons/favicon-32x32.png',
-    'copyright' => 'https://github.com/naim114',
-    'privacy-policy' => 'https://github.com/naim114',
-    'terms-conditions' => 'https://github.com/naim114',
+    'favicon' => Settings::where('name', 'favicon')->pluck('value')[0],
+    'logo' => Settings::where('name', 'logo')->pluck('value')[0],
+    'app-name' => Settings::where('name', 'app-name')->pluck('value')[0],
+    'copyright' => Settings::where('name', 'copyright')->pluck('value')[0],
+    'privacy-policy' => Settings::where('name', 'privacy-policy')->pluck('value')[0],
+    'terms-conditions' => Settings::where('name', 'terms-conditions')->pluck('value')[0],
     'months' => [
         1 => 'January',
         2 => 'February',

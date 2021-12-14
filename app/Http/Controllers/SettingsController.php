@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use App\Providers\UserActivityEvent;
@@ -11,24 +12,38 @@ class SettingsController extends Controller
 {
     public function index()
     {
-        $app_name = Config::get('app.name');
-
-        return view('settings.index', compact('app_name'));
+        return view('settings.index');
     }
 
-    public function change_app_name(Request $request)
+    public function update(Request $request)
     {
-        // TODO DOES NOT WORK IN RUNTIME
-        // updating application name in .env file
         try {
-            Config::set('app.name', $request->app_name);
+            Settings::where('name', 'app-name')
+                ->update([
+                    'value' => $request->app_name,
+                ]);
+
+            Settings::where('name', 'copyright')
+                ->update([
+                    'value' => $request->copyright,
+                ]);
+
+            Settings::where('name', 'privacy-policy')
+                ->update([
+                    'value' => $request->privacy_policy,
+                ]);
+
+            Settings::where('name', 'terms-conditions')
+                ->update([
+                    'value' => $request->terms_conditions,
+                ]);
         } catch (\Throwable $th) {
             return back()->with('error', $th);
         }
 
         // user activity log
-        event(new UserActivityEvent(Auth::user(), $request, 'Update application name to ' . $request->app_name));
+        event(new UserActivityEvent(Auth::user(), $request, 'Updating app name, privacy policy, terms & condition and copyright.'));
 
-        return back()->with('success', 'Application name has been changed to ' . $request->app_name);
+        return back()->with('success', 'Application successfully updated!');
     }
 }
