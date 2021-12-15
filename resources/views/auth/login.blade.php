@@ -46,9 +46,10 @@
                     </div>
 
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                        @if (Route::has('password.request'))
+                        {{-- @if (Route::has('password.request'))
                             <a class="small" href="password.html">Forgot Password?</a>
-                        @endif
+                        @endif --}}
+                        <div></div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
