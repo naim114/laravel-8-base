@@ -146,7 +146,7 @@
     </div>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4">
+            <div class="container-fluid p-4">
                 <h1 class="mt-4">@yield('page-title')</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">
