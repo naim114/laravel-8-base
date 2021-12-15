@@ -1,5 +1,14 @@
 ## Laravel 8 Base (creation notes)
 
+### How to run
+
+npm install
+composer install
+create db at phpmyadmin based on database name in .env file
+php artisan migrate:refresh --seed
+
+(make sure to enable/uncomment extension=fileinfo, extension=pdo_mysql at php.ini)
+
 ### Migration files
 php artisan make:migration ObjectName
 
