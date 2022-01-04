@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Models\UserActivity;
 use App\Providers\LoginActivityEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,15 +34,24 @@ class LoginActivityListener
         $user = $event->user;
         $request = $event->request;
 
-        $query = UserActivity::create([
-            'description' => "Logged in at {$current_timestamp} by {$user->username}({$user->email})",
-            'user_id' => $user->id,
-            'ip_address' => $request->getClientIp(),
-            'user_agent' => $request->server('HTTP_USER_AGENT'),
-            'created_at' => $current_timestamp,
-            'updated_at' => $current_timestamp,
-        ]);
+        try {
+            UserActivity::create([
+                'description' => "Logged in at {$current_timestamp} by {$user->username}({$user->email})",
+                'user_id' => $user->id,
+                'ip_address' => $request->getClientIp(),
+                'user_agent' => $request->server('HTTP_USER_AGENT'),
+                'created_at' => $current_timestamp,
+                'updated_at' => $current_timestamp,
+            ]);
 
-        return $query;
+            User::where('id', $user->id)
+                ->update([
+                    'last_login' => Carbon::now(),
+                ]);
+
+            return true;
+        } catch (\Throwable $th) {
+            return json_encode($th);
+        }
     }
 }
