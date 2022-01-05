@@ -10,6 +10,9 @@
 
 @section('content')
     <div class="container">
+        <button class="btn btn-primary mb-2 addButton">
+            + Add User
+        </button>
         <table id="usersTable" class="table table-striped table-hover table-responsive">
             <thead class="thead-dark">
                 <tr>
@@ -66,6 +69,9 @@
     </div>
 
     {{-- Modal --}}
+    <!-- Add Modal -->
+    @include('user.partials.add')
+
     <!-- Ban/Unban Modal -->
     @include('user.partials.ban')
 
@@ -79,6 +85,15 @@
     <script>
         $(document).ready(function() {
             $('#usersTable').DataTable();
+        });
+
+        // add modal
+        $(".addButton").click(function() {
+            $('#addModal').modal('show');
+        });
+
+        $(".closeAddModal").click(function() {
+            $('#addModal').modal('hide');
         });
 
         // ban modal

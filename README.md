@@ -48,6 +48,9 @@ Put assets, css, js folders/files inside public and just
 
 this package, Laravel UI (https://github.com/laravel/ui) will automatically create controller, middle, views, etc for registration, login, etc
 watch https://www.youtube.com/watch?v=XCrmk1bKxf4 for tutorial
+
+NOTE: comment $this->guard()->login($user); to disable login after register at vendor/laravel/ui/auth-backend/RegistersUsers.php 
+
 alternative for Laravel UI is Laravel Fortify
 
 ### Events & listeners (for activity log)

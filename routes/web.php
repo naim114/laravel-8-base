@@ -44,6 +44,14 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth', 'status']], function () {
     /**
+     *  test - test route
+     */
+    Route::get(
+        '/test/{id}',
+        [TestController::class, 'index']
+    )->name('test')->middleware('permissions:users.activity');
+
+    /**
      *  dashboard - index route
      */
     Route::get(
@@ -95,6 +103,11 @@ Route::group(['middleware' => ['auth', 'status']], function () {
         '/users/{action}/{id}',
         [UsersController::class, 'view']
     )->name('users.view')->middleware('permissions:users.manage');
+
+    Route::post(
+        '/users-add',
+        [UsersController::class, 'add']
+    )->name('users.add')->middleware('permissions:users.manage');
 
     Route::post(
         '/users-avatar',

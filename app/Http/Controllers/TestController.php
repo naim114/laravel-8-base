@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        # code...
+        return view('test.test' . $request->id);
     }
 }

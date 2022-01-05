@@ -7,10 +7,11 @@ use App\Models\UserActivity;
 use App\Models\Country;
 use App\Models\Role;
 use App\Providers\UserActivityEvent;
-use App\Support\Enum\UserStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -41,6 +42,34 @@ class UsersController extends Controller
         $all = true;
 
         return view('user.user_activity', compact('activities', 'count', 'all'));
+    }
+
+    public function add(Request $request)
+    {
+        try {
+            Validator::make((array)$request->all(), [
+                'full_name' => ['required', 'string', 'max:255'],
+                'username' => ['required', 'string', 'max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+
+            User::create([
+                'full_name' => $request->full_name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            return back()->with('success', 'User ' . $request->username  .  '(' . $request->email . ') registration success!');
+        } catch (\Throwable $th) {
+
+            if (str_contains($th, 'Duplicate entry')) {
+                $th = 'Duplicate entry. Username or email already registered.';
+            }
+
+            return back()->with('error', $th);
+        }
     }
 
     public function view(Request $request)

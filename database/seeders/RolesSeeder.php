@@ -69,7 +69,7 @@ class RolesSeeder extends Seeder
         Settings::create([
             'name' => 'logo',
             'display_name' => 'Logo',
-            'value' => 'assets/img/unikl.png',
+            'value' => 'assets/img/default-profile-picture.png',
         ]);
     }
 }

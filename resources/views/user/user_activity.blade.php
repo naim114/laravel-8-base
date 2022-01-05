@@ -36,7 +36,7 @@
                         <td>{{ $activity->description }}</td>
                         @if (isset($all))
                             <td><a
-                                    href="{{ route('users.view', ['action' => 'profile', 'id' => $activity->user_id]) }}">{{ get_user_detail($activity->user_id, 'username') }}</a>
+                                    href="{{ route('users.view', ['action' => 'profile', 'id' => $activity->user_id]) }}">{{ get_user_detail($activity->user_id, 'email') }}</a>
                             </td>
                         @endif
                         <td>{{ $activity->ip_address }}</td>

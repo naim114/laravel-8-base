@@ -1,17 +1,14 @@
-@extends('layouts.auth-master')
-
-@section('page-title', trans('app.register'))
-
-@section('content')
-    <div class="col-lg-7">
-        <div class="card shadow-lg border-0 rounded-lg mt-5">
-            <div class="card-header">
-                <h3 class="text-center font-weight-light my-4">Create Account</h3>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
-
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="POST" action="{{ route('users.add') }}">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">
+                        Add User
+                    </h5>
+                </div>
+                <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mb-md-0">
@@ -81,19 +78,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 mb-0">
-                        <div class="d-grid">
-                            <button class="btn btn-primary btn-block" type="submit">
-                                Create Account
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="card-footer text-center py-3">
-                <div class="small"><a href="{{ route('login') }}">Have an account? Go to login</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary closeAddModal" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-@stop
+</div>

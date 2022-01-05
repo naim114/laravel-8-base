@@ -23,9 +23,9 @@ class UserSeeder extends Seeder
 
         User::create([
             'full_name' => 'Super Admin',
-            'email' => 'superadmin@gmailya.com',
+            'email' => 'superadmin@email.com',
             'username' => 'superadmin',
-            'password' => Hash::make('superadmin@gmailya.com'),
+            'password' => Hash::make('liveforever'),
             'avatar' => null,
             'country_id' => null,
             'role_id' => $super_admin->id,
