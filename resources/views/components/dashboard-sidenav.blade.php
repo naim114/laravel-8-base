@@ -47,13 +47,13 @@
 
                     @if (has_permission('roles.manage') || has_permission('permissions.manage'))
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            data-bs-target="#collapseRole" aria-expanded="false" aria-controls="collapseRole">
                             <div class="sb-nav-link-icon"><i class="fas fa-lock"></i></div>
                             {{ trans('app.roles-permissions') }}
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
 
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                        <div class="collapse" id="collapseRole" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 @if (has_permission('roles.manage'))
