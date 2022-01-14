@@ -182,7 +182,7 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('permissions.delete')->middleware('permissions:permissions.manage');
 
     Route::get(
-        '/permissions/role/{id}',
+        '/permissions/role/view/{id}',
         [PermissionController::class, 'permission_role']
     )->name('permissions_role')->middleware('permissions:permissions.manage');
 
