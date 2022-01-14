@@ -74,12 +74,12 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('profile.avatar')->middleware('auth');
 
     Route::post(
-        '/update-profile',
+        '/update/profile',
         [ProfileController::class, 'updateProfile']
     )->name('profile.update_profile')->middleware('auth');
 
     Route::post(
-        '/update-auth',
+        '/update/auth',
         [ProfileController::class, 'updateAuth']
     )->name('profile.update_auth')->middleware('auth');
 
@@ -105,39 +105,33 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('users.view')->middleware('permissions:users.manage');
 
     Route::post(
-        '/users-add',
+        '/users/add',
         [UsersController::class, 'add']
     )->name('users.add')->middleware('permissions:users.manage');
 
     Route::post(
-        '/users-avatar',
+        '/users/avatar',
         [UsersController::class, 'avatar']
     )->name('users.avatar')->middleware('permissions:users.manage');
 
     Route::post(
-        '/users-edit',
+        '/users/edit',
         [UsersController::class, 'edit']
     )->name('users.edit')->middleware('permissions:users.manage');
 
     Route::post(
-        '/users-ban',
+        '/users/ban',
         [UsersController::class, 'ban']
     )->name('users.ban')->middleware('permissions:users.manage');
 
     Route::post(
-        '/users-delete',
+        '/users/delete',
         [UsersController::class, 'delete']
     )->name('users.delete')->middleware('permissions:users.manage');
 
-    // single user
-    Route::get(
-        '/users-activity/{id}',
-        [UsersController::class, 'activity']
-    )->name('users.user_activity')->middleware('permissions:users.activity');
-
     // all user
     Route::get(
-        '/users-activity',
+        '/users/activity',
         [UsersController::class, 'activityAll']
     )->name('users.users_activity')->middleware('permissions:users.activity');
 
@@ -150,17 +144,17 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('roles')->middleware('permissions:roles.manage');
 
     Route::post(
-        '/roles-add',
+        '/roles/add',
         [RoleController::class, 'add']
     )->name('roles.add')->middleware('permissions:roles.manage');
 
     Route::post(
-        '/roles-edit',
+        '/roles/edit',
         [RoleController::class, 'edit']
     )->name('roles.edit')->middleware('permissions:roles.manage');
 
     Route::post(
-        '/roles-delete',
+        '/roles/delete',
         [RoleController::class, 'delete']
     )->name('roles.delete')->middleware('permissions:roles.manage');
 
@@ -173,32 +167,32 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('permissions')->middleware('permissions:permissions.manage');
 
     Route::post(
-        '/permissions-add',
+        '/permissions/add',
         [PermissionController::class, 'add']
     )->name('permissions.add')->middleware('permissions:permissions.manage');
 
     Route::post(
-        '/permissions-edit',
+        '/permissions/edit',
         [PermissionController::class, 'edit']
     )->name('permissions.edit')->middleware('permissions:permissions.manage');
 
     Route::post(
-        '/permissions-delete',
+        '/permissions/delete',
         [PermissionController::class, 'delete']
     )->name('permissions.delete')->middleware('permissions:permissions.manage');
 
     Route::get(
-        '/permissions-role/{id}',
+        '/permissions/role/{id}',
         [PermissionController::class, 'permission_role']
     )->name('permissions_role')->middleware('permissions:permissions.manage');
 
     Route::post(
-        '/permissions-role-add',
+        '/permissions/role/add',
         [PermissionController::class, 'permission_role_add']
     )->name('permissions_role.add')->middleware('permissions:permissions.manage');
 
     Route::post(
-        '/permissions-role-delete',
+        '/permissions/role/delete',
         [PermissionController::class, 'permission_role_delete']
     )->name('permissions_role.delete')->middleware('permissions:permissions.manage');
 
@@ -211,17 +205,17 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('settings')->middleware('permissions:settings.general');
 
     Route::post(
-        '/settings-update',
+        '/settings/update',
         [SettingsController::class, 'update']
     )->name('settings.update')->middleware('permissions:settings.general');
 
     Route::post(
-        '/settings-logo',
+        '/settings/logo',
         [SettingsController::class, 'logo']
     )->name('settings.logo')->middleware('permissions:settings.general');
 
     Route::post(
-        '/settings-favicon',
+        '/settings/favicon',
         [SettingsController::class, 'favicon']
     )->name('settings.favicon')->middleware('permissions:settings.general');
 });

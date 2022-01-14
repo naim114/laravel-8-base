@@ -24,15 +24,6 @@ class UsersController extends Controller
         return view('user.index', compact('users', 'count'));
     }
 
-    public function activity(Request $request)
-    {
-        $activities = UserActivity::where('user_id', $request->id)->orderBy('created_at', 'desc')->get();
-
-        $count = 1;
-
-        return view('user.user_activity', compact('activities', 'count'));
-    }
-
     public function activityAll(Request $request)
     {
         $activities = UserActivity::all();
@@ -74,20 +65,36 @@ class UsersController extends Controller
 
     public function view(Request $request)
     {
-        $user = User::where('id', $request->id)->first();
-
-        $countries = Country::all();
-
-        $country = Country::where('id', $user->country_id)->first();
-
-        $birthday = $user->birthday == null ? null : $user->birthday->format('Y-m-d');
-
-        $roles = Role::where('id', '!=', 1)->get();
-
         if ($request->action == "profile") {
+            $user = User::where('id', $request->id)->first();
+
+            $countries = Country::all();
+
+            $country = Country::where('id', $user->country_id)->first();
+
+            $birthday = $user->birthday == null ? null : $user->birthday->format('Y-m-d');
+
+            $roles = Role::where('id', '!=', 1)->get();
+
             return view('user.user_profile', compact('user', 'birthday', 'country'));
         } elseif ($request->action == "edit") {
+            $user = User::where('id', $request->id)->first();
+
+            $countries = Country::all();
+
+            $country = Country::where('id', $user->country_id)->first();
+
+            $birthday = $user->birthday == null ? null : $user->birthday->format('Y-m-d');
+
+            $roles = Role::where('id', '!=', 1)->get();
+
             return view('user.user_edit', compact('user', 'birthday', 'countries', 'roles'));
+        } elseif ($request->action == "activity") {
+            $activities = UserActivity::where('user_id', $request->id)->orderBy('created_at', 'desc')->get();
+
+            $count = 1;
+
+            return view('user.user_activity', compact('activities', 'count'));
         }
 
         return back();

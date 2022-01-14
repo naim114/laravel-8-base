@@ -43,7 +43,7 @@
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @if (has_permission('users.activity'))
                                     <li><a class="dropdown-item"
-                                            href="{{ route('users.user_activity', ['id' => $user->id]) }}">Activity
+                                            href="{{ route('users.view', ['action' => 'activity', 'id' => $user->id]) }}">Activity
                                             Log</a>
                                     </li>
                                 @endif
