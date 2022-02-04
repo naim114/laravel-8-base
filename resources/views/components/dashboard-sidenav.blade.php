@@ -46,8 +46,8 @@
                     @endif
 
                     @if (has_permission('roles.manage') || has_permission('permissions.manage'))
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseRole" aria-expanded="false" aria-controls="collapseRole">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRole"
+                            aria-expanded="false" aria-controls="collapseRole">
                             <div class="sb-nav-link-icon"><i class="fas fa-lock"></i></div>
                             {{ trans('app.roles-permissions') }}
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>

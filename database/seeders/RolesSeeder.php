@@ -63,13 +63,56 @@ class RolesSeeder extends Seeder
         Settings::create([
             'name' => 'favicon',
             'display_name' => 'Favicon',
-            'value' => 'assets/icons/favicon-32x32.png',
+            'value' => 'assets/img/default-image.jpg',
         ]);
 
         Settings::create([
             'name' => 'logo',
             'display_name' => 'Logo',
-            'value' => 'assets/img/default-profile-picture.png',
+            'value' => 'assets/img/default-image.jpg',
+        ]);
+
+        Settings::create([
+            'name' => 'color.primary',
+            'display_name' => 'Primary Color',
+            'value' => '52,93,106',
+        ]);
+
+        Settings::create([
+            'name' => 'color.primary.hex',
+            'display_name' => 'Primary Color Hex',
+            'value' => '#345d6a',
+        ]);
+
+
+        Settings::create([
+            'name' => 'color.secondary',
+            'display_name' => 'Secondary Color',
+            'value' => '108,117,125',
+        ]);
+
+        Settings::create([
+            'name' => 'color.success',
+            'display_name' => 'Success Color',
+            'value' => '25,135,84',
+        ]);
+
+        Settings::create([
+            'name' => 'color.info',
+            'display_name' => 'Info Color',
+            'value' => '13,202,240',
+        ]);
+
+        Settings::create([
+            'name' => 'color.warning',
+            'display_name' => 'Warning Color',
+            'value' => '255,193,7',
+        ]);
+
+        Settings::create([
+            'name' => 'color.danger',
+            'display_name' => 'Danger Color',
+            'value' => '220,53,69',
         ]);
     }
 }

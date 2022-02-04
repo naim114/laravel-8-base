@@ -27,22 +27,59 @@
 
 @section('content')
     <div class="container">
+        <div class="card p-4 mb-3">
+            @include('settings.partials.general')
+        </div>
+        <div class="card p-4 mb-3">
+            @include('settings.partials.color')
+        </div>
         <div class="row">
-            <div class="col-md-6 mt-2">
+            <div class="col-md-4 mt-2">
                 <div class="card p-4">
-                    @include('settings.partials.general')
+                    @include('settings.partials.auth-wallpaper')
                 </div>
             </div>
-            <div class="col-md-6 mt-2">
+            <div class="col-md-4 mt-2">
                 <div class="card p-4">
                     <div class="form-group">
                         @include('settings.partials.logo')
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-2">
+                <div class="card p-4">
+                    <div class="form-group">
                         @include('settings.partials.favicon')
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="defaultColorModal" tabindex="-1" role="dialog" aria-labelledby="defaultColorModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="POST" action="{{ route('settings.color.default') }}">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="defaultColorModalLabel">
+                            Default Color
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        Revert back application color to default?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closeDefaultColorModal"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @stop
 
 @section('scripts')
@@ -52,6 +89,15 @@
             // reset fileInputLogo value onready
             $('#fileInputLogo').val(null);
             $('#fileInputFavicon').val(null);
+        });
+
+        // default color modal
+        $(".openDefaultColorModal").click(function() {
+            $('#defaultColorModal').modal('show');
+        });
+
+        $(".closeDefaultColorModal").click(function() {
+            $('#defaultColorModal').modal('hide');
         });
 
         // front-end for logo button

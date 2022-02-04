@@ -13,6 +13,19 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
+    <style>
+        :root {
+            --primary-color: {{ trans('app.color.primary.hex') }};
+            --primary-color-rgb: {{ trans('app.color.primary') }};
+            --secondary-color-rgb: {{ trans('app.color.secondary') }};
+            --success-color-rgb: {{ trans('app.color.success') }};
+            --info-color-rgb: {{ trans('app.color.info') }};
+            --warning-color-rgb: {{ trans('app.color.warning') }};
+            --danger-color-rgb: {{ trans('app.color.danger') }};
+        }
+
+    </style>
+
     @yield('custom-head')
 </head>
 

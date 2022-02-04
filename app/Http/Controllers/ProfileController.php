@@ -57,7 +57,7 @@ class ProfileController extends Controller
         }
 
         // user activity log
-        event(new UserActivityEvent($user, $request, 'Change avatar'));
+        event(new UserActivityEvent($user, $request, 'Update avatar'));
 
         return back()->with('success', 'Avatar uploaded successfully!');
     }

@@ -210,6 +210,16 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('settings.update')->middleware('permissions:settings.general');
 
     Route::post(
+        '/settings/color',
+        [SettingsController::class, 'color']
+    )->name('settings.color')->middleware('permissions:settings.general');
+
+    Route::post(
+        '/settings/color/default',
+        [SettingsController::class, 'color_default']
+    )->name('settings.color.default')->middleware('permissions:settings.general');
+
+    Route::post(
         '/settings/logo',
         [SettingsController::class, 'logo']
     )->name('settings.logo')->middleware('permissions:settings.general');

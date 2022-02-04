@@ -10,6 +10,13 @@ return [
     'copyright' => Settings::where('name', 'copyright')->pluck('value')[0],
     'privacy-policy' => Settings::where('name', 'privacy-policy')->pluck('value')[0],
     'terms-conditions' => Settings::where('name', 'terms-conditions')->pluck('value')[0],
+    'color.primary.hex' => Settings::where('name', 'color.primary.hex')->pluck('value')[0],
+    'color.primary' => Settings::where('name', 'color.primary')->pluck('value')[0],
+    'color.secondary' => Settings::where('name', 'color.secondary')->pluck('value')[0],
+    'color.success' => Settings::where('name', 'color.success')->pluck('value')[0],
+    'color.info' => Settings::where('name', 'color.info')->pluck('value')[0],
+    'color.warning' => Settings::where('name', 'color.warning')->pluck('value')[0],
+    'color.danger' => Settings::where('name', 'color.danger')->pluck('value')[0],
     'months' => [
         1 => 'January',
         2 => 'February',

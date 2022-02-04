@@ -172,7 +172,7 @@ class UsersController extends Controller
         }
 
         // user activity log
-        event(new UserActivityEvent(Auth::user(), $request, 'Change user ' . $user->email . '(id: ' . $user->id . ')' . ' to ' . $request->status));
+        event(new UserActivityEvent(Auth::user(), $request, 'Update user ' . $user->email . '(id: ' . $user->id . ')' . ' to ' . $request->status));
 
         return back()->with('success', 'User status has been changed to ' . $request->status);
     }
