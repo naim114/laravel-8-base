@@ -15,13 +15,19 @@
 
     <style>
         :root {
-            --primary-color: {{ trans('app.color.primary.hex') }};
-            --primary-color-rgb: {{ trans('app.color.primary') }};
-            --secondary-color-rgb: {{ trans('app.color.secondary') }};
-            --success-color-rgb: {{ trans('app.color.success') }};
-            --info-color-rgb: {{ trans('app.color.info') }};
-            --warning-color-rgb: {{ trans('app.color.warning') }};
-            --danger-color-rgb: {{ trans('app.color.danger') }};
+            --primary-color-hex: {{ trans('app.color.primary.hex') }};
+            --secondary-color-hex: {{ trans('app.color.secondary.hex') }};
+            --success-color-hex: {{ trans('app.color.success.hex') }};
+            --info-color-hex: {{ trans('app.color.info.hex') }};
+            --warning-color-hex: {{ trans('app.color.warning.hex') }};
+            --danger-color-hex: {{ trans('app.color.danger.hex') }};
+
+            --primary-color-rgb: {{ trans('app.color.primary.rgb') }};
+            --secondary-color-rgb: {{ trans('app.color.secondary.rgb') }};
+            --success-color-rgb: {{ trans('app.color.success.rgb') }};
+            --info-color-rgb: {{ trans('app.color.info.rgb') }};
+            --warning-color-rgb: {{ trans('app.color.warning.rgb') }};
+            --danger-color-rgb: {{ trans('app.color.danger.rgb') }};
         }
 
     </style>

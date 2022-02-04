@@ -73,44 +73,73 @@ class RolesSeeder extends Seeder
         ]);
 
         Settings::create([
-            'name' => 'color.primary',
-            'display_name' => 'Primary Color',
-            'value' => '52,93,106',
-        ]);
-
-        Settings::create([
             'name' => 'color.primary.hex',
             'display_name' => 'Primary Color Hex',
             'value' => '#345d6a',
         ]);
 
+        Settings::create([
+            'name' => 'color.secondary.hex',
+            'display_name' => 'secondary Color Hex',
+            'value' => '#6c757d',
+        ]);
 
         Settings::create([
-            'name' => 'color.secondary',
+            'name' => 'color.success.hex',
+            'display_name' => 'success Color Hex',
+            'value' => '#198754',
+        ]);
+
+        Settings::create([
+            'name' => 'color.info.hex',
+            'display_name' => 'info Color Hex',
+            'value' => '#0dcaf0',
+        ]);
+
+        Settings::create([
+            'name' => 'color.warning.hex',
+            'display_name' => 'warning Color Hex',
+            'value' => '#ffc107',
+        ]);
+
+        Settings::create([
+            'name' => 'color.danger.hex',
+            'display_name' => 'danger Color Hex',
+            'value' => '#dc3545',
+        ]);
+
+        Settings::create([
+            'name' => 'color.primary.rgb',
+            'display_name' => 'Primary Color',
+            'value' => '52,93,106',
+        ]);
+
+        Settings::create([
+            'name' => 'color.secondary.rgb',
             'display_name' => 'Secondary Color',
             'value' => '108,117,125',
         ]);
 
         Settings::create([
-            'name' => 'color.success',
+            'name' => 'color.success.rgb',
             'display_name' => 'Success Color',
             'value' => '25,135,84',
         ]);
 
         Settings::create([
-            'name' => 'color.info',
+            'name' => 'color.info.rgb',
             'display_name' => 'Info Color',
             'value' => '13,202,240',
         ]);
 
         Settings::create([
-            'name' => 'color.warning',
+            'name' => 'color.warning.rgb',
             'display_name' => 'Warning Color',
             'value' => '255,193,7',
         ]);
 
         Settings::create([
-            'name' => 'color.danger',
+            'name' => 'color.danger.rgb',
             'display_name' => 'Danger Color',
             'value' => '220,53,69',
         ]);

@@ -55,12 +55,18 @@ class SettingsController extends Controller
         unset($req['_token']);
 
         $update['color.primary.hex'] = $request->primary_color;
-        $update['color.primary'] = hex2rgb($request->primary_color);
-        $update['color.secondary'] = hex2rgb($request->secondary_color);
-        $update['color.success'] = hex2rgb($request->success_color);
-        $update['color.info'] = hex2rgb($request->info_color);
-        $update['color.warning'] = hex2rgb($request->warning_color);
-        $update['color.danger'] = hex2rgb($request->danger_color);
+        $update['color.secondary.hex'] = $request->secondary_color;
+        $update['color.success.hex'] = $request->success_color;
+        $update['color.info.hex'] = $request->info_color;
+        $update['color.warning.hex'] = $request->warning_color;
+        $update['color.danger.hex'] = $request->danger_color;
+
+        $update['color.primary.rgb'] = hex2rgb($request->primary_color);
+        $update['color.secondary.rgb'] = hex2rgb($request->secondary_color);
+        $update['color.success.rgb'] = hex2rgb($request->success_color);
+        $update['color.info.rgb'] = hex2rgb($request->info_color);
+        $update['color.warning.rgb'] = hex2rgb($request->warning_color);
+        $update['color.danger.rgb'] = hex2rgb($request->danger_color);
 
         try {
             Settings::where('name', 'color.primary.hex')
@@ -68,34 +74,59 @@ class SettingsController extends Controller
                     'value' => $update['color.primary.hex'],
                 ]);
 
-            Settings::where('name', 'color.primary')
+            Settings::where('name', 'color.secondary.hex')
                 ->update([
-                    'value' => $update['color.primary'],
+                    'value' => $update['color.secondary.hex'],
                 ]);
 
-            Settings::where('name', 'color.secondary')
+            Settings::where('name', 'color.success.hex')
                 ->update([
-                    'value' => $update['color.secondary'],
+                    'value' => $update['color.success.hex'],
                 ]);
 
-            Settings::where('name', 'color.success')
+            Settings::where('name', 'color.info.hex')
                 ->update([
-                    'value' => $update['color.success'],
+                    'value' => $update['color.info.hex'],
                 ]);
 
-            Settings::where('name', 'color.info')
+            Settings::where('name', 'color.warning.hex')
                 ->update([
-                    'value' => $update['color.info'],
+                    'value' => $update['color.warning.hex'],
                 ]);
 
-            Settings::where('name', 'color.warning')
+            Settings::where('name', 'color.danger.hex')
                 ->update([
-                    'value' => $update['color.warning'],
+                    'value' => $update['color.danger.hex'],
                 ]);
 
-            Settings::where('name', 'color.danger')
+            Settings::where('name', 'color.primary.rgb')
                 ->update([
-                    'value' => $update['color.danger'],
+                    'value' => $update['color.primary.rgb'],
+                ]);
+
+            Settings::where('name', 'color.secondary.rgb')
+                ->update([
+                    'value' => $update['color.secondary.rgb'],
+                ]);
+
+            Settings::where('name', 'color.success.rgb')
+                ->update([
+                    'value' => $update['color.success.rgb'],
+                ]);
+
+            Settings::where('name', 'color.info.rgb')
+                ->update([
+                    'value' => $update['color.info.rgb'],
+                ]);
+
+            Settings::where('name', 'color.warning.rgb')
+                ->update([
+                    'value' => $update['color.warning.rgb'],
+                ]);
+
+            Settings::where('name', 'color.danger.rgb')
+                ->update([
+                    'value' => $update['color.danger.rgb'],
                 ]);
         } catch (\Throwable $th) {
             return back()->with('error', $th);
@@ -110,12 +141,18 @@ class SettingsController extends Controller
     public function color_default(Request $request)
     {
         $update['color.primary.hex'] = '#345d6a';
-        $update['color.primary'] = '52,93,106';
-        $update['color.secondary'] = '108,117,125';
-        $update['color.success'] = '25,135,84';
-        $update['color.info'] = '13,202,240';
-        $update['color.warning'] = '255,193,7';
-        $update['color.danger'] = '220,53,69';
+        $update['color.secondary.hex'] = '#6c757d';
+        $update['color.success.hex'] = '#198754';
+        $update['color.info.hex'] = '#0dcaf0';
+        $update['color.warning.hex'] = '#ffc107';
+        $update['color.danger.hex'] = '#dc3545';
+
+        $update['color.primary.rgb'] = '52,93,106';
+        $update['color.secondary.rgb'] = '108,117,125';
+        $update['color.success.rgb'] = '25,135,84';
+        $update['color.info.rgb'] = '13,202,240';
+        $update['color.warning.rgb'] = '255,193,7';
+        $update['color.danger.rgb'] = '220,53,69';
 
         try {
             Settings::where('name', 'color.primary.hex')
@@ -123,34 +160,59 @@ class SettingsController extends Controller
                     'value' => $update['color.primary.hex'],
                 ]);
 
-            Settings::where('name', 'color.primary')
+            Settings::where('name', 'color.secondary.hex')
                 ->update([
-                    'value' => $update['color.primary'],
+                    'value' => $update['color.secondary.hex'],
                 ]);
 
-            Settings::where('name', 'color.secondary')
+            Settings::where('name', 'color.success.hex')
                 ->update([
-                    'value' => $update['color.secondary'],
+                    'value' => $update['color.success.hex'],
                 ]);
 
-            Settings::where('name', 'color.success')
+            Settings::where('name', 'color.info.hex')
                 ->update([
-                    'value' => $update['color.success'],
+                    'value' => $update['color.info.hex'],
                 ]);
 
-            Settings::where('name', 'color.info')
+            Settings::where('name', 'color.warning.hex')
                 ->update([
-                    'value' => $update['color.info'],
+                    'value' => $update['color.warning.hex'],
                 ]);
 
-            Settings::where('name', 'color.warning')
+            Settings::where('name', 'color.danger.hex')
                 ->update([
-                    'value' => $update['color.warning'],
+                    'value' => $update['color.danger.hex'],
                 ]);
 
-            Settings::where('name', 'color.danger')
+            Settings::where('name', 'color.primary.rgb')
                 ->update([
-                    'value' => $update['color.danger'],
+                    'value' => $update['color.primary.rgb'],
+                ]);
+
+            Settings::where('name', 'color.secondary.rgb')
+                ->update([
+                    'value' => $update['color.secondary.rgb'],
+                ]);
+
+            Settings::where('name', 'color.success.rgb')
+                ->update([
+                    'value' => $update['color.success.rgb'],
+                ]);
+
+            Settings::where('name', 'color.info.rgb')
+                ->update([
+                    'value' => $update['color.info.rgb'],
+                ]);
+
+            Settings::where('name', 'color.warning.rgb')
+                ->update([
+                    'value' => $update['color.warning.rgb'],
+                ]);
+
+            Settings::where('name', 'color.danger.rgb')
+                ->update([
+                    'value' => $update['color.danger.rgb'],
                 ]);
         } catch (\Throwable $th) {
             return back()->with('error', $th);

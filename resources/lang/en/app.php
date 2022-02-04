@@ -10,13 +10,22 @@ return [
     'copyright' => Settings::where('name', 'copyright')->pluck('value')[0],
     'privacy-policy' => Settings::where('name', 'privacy-policy')->pluck('value')[0],
     'terms-conditions' => Settings::where('name', 'terms-conditions')->pluck('value')[0],
+
+    // colors
     'color.primary.hex' => Settings::where('name', 'color.primary.hex')->pluck('value')[0],
-    'color.primary' => Settings::where('name', 'color.primary')->pluck('value')[0],
-    'color.secondary' => Settings::where('name', 'color.secondary')->pluck('value')[0],
-    'color.success' => Settings::where('name', 'color.success')->pluck('value')[0],
-    'color.info' => Settings::where('name', 'color.info')->pluck('value')[0],
-    'color.warning' => Settings::where('name', 'color.warning')->pluck('value')[0],
-    'color.danger' => Settings::where('name', 'color.danger')->pluck('value')[0],
+    'color.secondary.hex' => Settings::where('name', 'color.secondary.hex')->pluck('value')[0],
+    'color.success.hex' => Settings::where('name', 'color.success.hex')->pluck('value')[0],
+    'color.info.hex' => Settings::where('name', 'color.info.hex')->pluck('value')[0],
+    'color.warning.hex' => Settings::where('name', 'color.warning.hex')->pluck('value')[0],
+    'color.danger.hex' => Settings::where('name', 'color.danger.hex')->pluck('value')[0],
+
+    'color.primary.rgb' => Settings::where('name', 'color.primary.rgb')->pluck('value')[0],
+    'color.secondary.rgb' => Settings::where('name', 'color.secondary.rgb')->pluck('value')[0],
+    'color.success.rgb' => Settings::where('name', 'color.success.rgb')->pluck('value')[0],
+    'color.info.rgb' => Settings::where('name', 'color.info.rgb')->pluck('value')[0],
+    'color.warning.rgb' => Settings::where('name', 'color.warning.rgb')->pluck('value')[0],
+    'color.danger.rgb' => Settings::where('name', 'color.danger.rgb')->pluck('value')[0],
+
     'months' => [
         1 => 'January',
         2 => 'February',
