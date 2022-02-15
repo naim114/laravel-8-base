@@ -19,7 +19,7 @@
 
         .bg {
             /* The image used */
-            background-image: url("assets/img/mozaic-wallpaper.jpg");
+            background-image: url({{ trans('app.wallpaper.auth') }});
 
             /* Full height */
             height: 100%;

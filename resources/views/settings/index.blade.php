@@ -36,7 +36,9 @@
         <div class="row">
             <div class="col-md-4 mt-2">
                 <div class="card p-4">
-                    @include('settings.partials.auth-wallpaper')
+                    <div class="form-group">
+                        @include('settings.partials.auth-wallpaper')
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 mt-2">
@@ -89,6 +91,7 @@
             // reset fileInputLogo value onready
             $('#fileInputLogo').val(null);
             $('#fileInputFavicon').val(null);
+            $('#fileInputWallpaper').val(null);
         });
 
         // default color modal
@@ -98,6 +101,45 @@
 
         $(".closeDefaultColorModal").click(function() {
             $('#defaultColorModal').modal('hide');
+        });
+
+        // front-end for auth wallpaper button
+        $(document).on("click", "#changeWallpaperButton", function() {
+            $("#inputFileButtonWallpaper").removeClass('hide');
+            $("#cancelChangeWallpaperButton").removeClass('hide');
+            $("#submitWallpaperButton").removeClass('hide');
+            $("#guideMsgWallpaper").removeClass('hide');
+
+            $("#changeWallpaperButton").addClass('hide');
+        });
+
+        $(document).on("click", "#cancelChangeWallpaperButton", function() {
+            $("#inputFileButtonWallpaper").addClass('hide');
+            $("#cancelChangeWallpaperButton").addClass('hide');
+            $("#submitWallpaperButton").addClass('hide');
+            $("#guideMsgWallpaper").addClass('hide');
+
+            $("#changeWallpaperButton").removeClass('hide');
+            $('#fileInputWallpaper').val(null);
+        });
+
+        $(document).on("click", ".browseWallpaper", function() {
+            var fileWallpaper = $(this).parents().find(".fileWallpaper");
+            fileWallpaper.trigger("click");
+        });
+
+        $('#fileInputWallpaper').change(function(e) {
+            var fileName = e.target.files[0].name;
+            console.log(fileName);
+            $("#fileWallpaper").val(fileName);
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("previewWallpaper").src = e.target.result;
+            };
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
         });
 
         // front-end for logo button

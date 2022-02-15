@@ -73,6 +73,12 @@ class RolesSeeder extends Seeder
         ]);
 
         Settings::create([
+            'name' => 'wallpaper.auth',
+            'display_name' => 'Login/Register Background Wallpaper',
+            'value' => 'assets/img/mozaic-wallpaper.jpg',
+        ]);
+
+        Settings::create([
             'name' => 'color.primary.hex',
             'display_name' => 'Primary Color Hex',
             'value' => '#345d6a',

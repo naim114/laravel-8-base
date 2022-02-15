@@ -224,6 +224,42 @@ class SettingsController extends Controller
         return back()->with('success', 'Application color successfully updated to default!');
     }
 
+    public function wallpaper_auth(Request $request)
+    {
+        $settings = Settings::where('name', 'wallpaper.auth')->first();
+
+        $request->validate([
+            'wallpaper' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if (File::exists(public_path($settings->value)) && $settings->value != 'assets/img/mozaic-wallpaper.jpg') {
+            if (!str_contains(public_path($settings->value), "assets/img/mozaic-wallpaper.jpg")) {
+                File::delete(public_path($settings->value));
+            }
+        }
+
+        // creating name and path for the file
+        // time() is current unix timestamp
+        $fileName = time() . '_auth_' . $request->file('wallpaper')->getClientOriginalName();
+
+        try {
+            $request->wallpaper->move(public_path('upload/wallpaper'), $fileName);
+
+            // updating details in db
+            Settings::where('name', 'wallpaper.auth')
+                ->update([
+                    'value' => 'upload/wallpaper/' . $fileName,
+                ]);
+        } catch (\Throwable $th) {
+            return back()->with('error', $th);
+        }
+
+        // user activity log
+        event(new UserActivityEvent(Auth::user(), $request, 'Update auth wallpaper'));
+
+        return back()->with('success', 'Auth wallpaper successfully updated!');
+    }
+
     public function logo(Request $request)
     {
         $settings = Settings::where('name', 'logo')->first();
@@ -232,7 +268,6 @@ class SettingsController extends Controller
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // if user already has logo
         if (File::exists(public_path($settings->value)) && $settings->value != 'assets/img/default-profile-picture.jpg' && $settings->value != 'default-profile-picture.png') {
             if (!str_contains(public_path($settings->value), "assets/icons/favicon-32x32.png") && !str_contains(public_path($settings->value), "assets/img/default-profile-picture.png") && !str_contains(public_path($settings->value), "assets/img/default-image.jpg")) {
                 File::delete(public_path($settings->value));
@@ -269,7 +304,6 @@ class SettingsController extends Controller
             'favicon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // if user already has favicon
         if (File::exists(public_path($settings->value))) {
             if (!str_contains(public_path($settings->value), "assets/icons/favicon-32x32.png") && !str_contains(public_path($settings->value), "assets/img/default-profile-picture.png") && !str_contains(public_path($settings->value), "assets/img/default-image.jpg")) {
                 File::delete(public_path($settings->value));

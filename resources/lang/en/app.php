@@ -4,6 +4,7 @@ use App\Models\Settings;
 
 return [
     // general
+    'wallpaper.auth' => Settings::where('name', 'wallpaper.auth')->pluck('value')[0],
     'favicon' => Settings::where('name', 'favicon')->pluck('value')[0],
     'logo' => Settings::where('name', 'logo')->pluck('value')[0],
     'app-name' => Settings::where('name', 'app-name')->pluck('value')[0],

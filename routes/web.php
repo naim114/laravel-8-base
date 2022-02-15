@@ -220,6 +220,11 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     )->name('settings.color.default')->middleware('permissions:settings.general');
 
     Route::post(
+        '/settings/wallpaper/auth',
+        [SettingsController::class, 'wallpaper_auth']
+    )->name('settings.wallpaper.auth')->middleware('permissions:settings.general');
+
+    Route::post(
         '/settings/logo',
         [SettingsController::class, 'logo']
     )->name('settings.logo')->middleware('permissions:settings.general');
