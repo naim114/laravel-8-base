@@ -16,7 +16,7 @@
     <div id="layoutError">
         <div id="layoutError_content">
             <main>
-                <div class="container">
+                <div class="container align-middle">
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <div class="text-center mt-4">
@@ -27,7 +27,7 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-primary">
-                                        <h3>Log Out</h3>
+                                        <h5>Log out</h5>
                                     </button>
                                 </form>
                             </div>
