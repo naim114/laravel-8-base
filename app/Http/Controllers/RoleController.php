@@ -23,11 +23,7 @@ class RoleController extends Controller
         $add = $request->all();
 
         // add role in db
-        try {
-            Role::create($add);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        Role::create($add);
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Add role'));
@@ -41,12 +37,8 @@ class RoleController extends Controller
         unset($update['_token']);
 
         // updating role in db
-        try {
-            Role::where('id', $update['id'])
-                ->update($update);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        Role::where('id', $update['id'])
+            ->update($update);
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Update role ' . $request->name . '(id: ' . $request->id . ')'));
@@ -65,12 +57,8 @@ class RoleController extends Controller
         }
 
         // soft delete in db
-        try {
-            Role::where('id', $request->id)
-                ->delete();
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        Role::where('id', $request->id)
+            ->delete();
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Delete role ' . $role->name . '(id: ' . $role->id . ')'));

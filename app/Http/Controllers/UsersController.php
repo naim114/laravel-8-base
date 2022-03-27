@@ -118,11 +118,7 @@ class UsersController extends Controller
         $fileName = $user->id . '_' . time() . '_' . $request->file('avatar')->getClientOriginalName();
 
         // storing file in public/upload/avatar
-        try {
-            $request->avatar->move(public_path('upload/avatar'), $fileName);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        $request->avatar->move(public_path('upload/avatar'), $fileName);
 
         // updating user details in db
         User::where('id', $user->id)
@@ -144,12 +140,8 @@ class UsersController extends Controller
         unset($update['_token']);
 
         // updating profile details in db
-        try {
-            User::where('id', $user->id)
-                ->update($update);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        User::where('id', $user->id)
+            ->update($update);
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Edit user ' . $user->email . '(id: ' . $user->id . ')' . ' profile details'));
@@ -162,14 +154,10 @@ class UsersController extends Controller
         $user = User::where('id', $request->id)->first();
 
         // change user status in db
-        try {
-            User::where('id', $user->id)
-                ->update([
-                    'status' => $request->status,
-                ]);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        User::where('id', $user->id)
+            ->update([
+                'status' => $request->status,
+            ]);
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Update user ' . $user->email . '(id: ' . $user->id . ')' . ' to ' . $request->status));
@@ -182,12 +170,9 @@ class UsersController extends Controller
         $user = User::where('id', $request->id)->first();
 
         // soft delete in db
-        try {
-            User::where('id', $user->id)
-                ->delete();
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        User::where('id', $user->id)
+            ->delete();
+
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Delete user ' . $user->email . '(id: ' . $user->id . ')'));

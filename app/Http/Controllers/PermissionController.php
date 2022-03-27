@@ -31,11 +31,7 @@ class PermissionController extends Controller
         ]);
 
         // add permission in db
-        try {
-            Permission::create($add);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        Permission::create($add);
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Add permission'));
@@ -49,12 +45,8 @@ class PermissionController extends Controller
         unset($update['_token']);
 
         // updating permission in db
-        try {
-            Permission::where('id', $update['id'])
-                ->update($update);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        Permission::where('id', $update['id'])
+            ->update($update);
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Update permission ' . $request->name . '(id: ' . $request->id . ')'));
@@ -73,12 +65,8 @@ class PermissionController extends Controller
         }
 
         // soft delete in db
-        try {
-            Permission::where('id', $request->id)
-                ->delete();
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        Permission::where('id', $request->id)
+            ->delete();
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Delete permission ' . $permission->name . '(id: ' . $permission->id . ')'));
@@ -113,14 +101,10 @@ class PermissionController extends Controller
     public function permission_role_add(Request $request)
     {
         // add permission in db
-        try {
-            PermissionRole::create([
-                'permission_id' => $request->permission_id,
-                'role_id' => $request->role_id,
-            ]);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        PermissionRole::create([
+            'permission_id' => $request->permission_id,
+            'role_id' => $request->role_id,
+        ]);
 
         event(new UserActivityEvent(Auth::user(), $request, 'Add permission role (permission id: ' . $request->permission_id . ', role id:' . $request->role_id . ')'));
 
@@ -130,13 +114,9 @@ class PermissionController extends Controller
     public function permission_role_delete(Request $request)
     {
         // force delete in db
-        try {
-            PermissionRole::where('permission_id', $request->permission_id)
-                ->where('role_id', $request->role_id)
-                ->forceDelete();
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        PermissionRole::where('permission_id', $request->permission_id)
+            ->where('role_id', $request->role_id)
+            ->forceDelete();
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Delete permission role (permission id: ' . $request->permission_id . ', role id:' . $request->role_id . ')'));

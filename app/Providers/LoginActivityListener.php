@@ -34,24 +34,20 @@ class LoginActivityListener
         $user = $event->user;
         $request = $event->request;
 
-        try {
-            UserActivity::create([
-                'description' => "Logged in at {$current_timestamp} by {$user->username}({$user->email})",
-                'user_id' => $user->id,
-                'ip_address' => $request->getClientIp(),
-                'user_agent' => $request->server('HTTP_USER_AGENT'),
-                'created_at' => $current_timestamp,
-                'updated_at' => $current_timestamp,
+        UserActivity::create([
+            'description' => "Logged in at {$current_timestamp} by {$user->username}({$user->email})",
+            'user_id' => $user->id,
+            'ip_address' => $request->getClientIp(),
+            'user_agent' => $request->server('HTTP_USER_AGENT'),
+            'created_at' => $current_timestamp,
+            'updated_at' => $current_timestamp,
+        ]);
+
+        User::where('id', $user->id)
+            ->update([
+                'last_login' => Carbon::now(),
             ]);
 
-            User::where('id', $user->id)
-                ->update([
-                    'last_login' => Carbon::now(),
-                ]);
-
-            return true;
-        } catch (\Throwable $th) {
-            return json_encode($th);
-        }
+        return true;
     }
 }

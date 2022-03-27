@@ -68,12 +68,8 @@ class ProfileController extends Controller
         unset($update['_token']);
 
         // updating profile details in db
-        try {
-            User::where('id', Auth::user()->id)
-                ->update($update);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th);
-        }
+        User::where('id', Auth::user()->id)
+            ->update($update);
 
         // user activity log
         event(new UserActivityEvent(Auth::user(), $request, 'Update profile details'));
