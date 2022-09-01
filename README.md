@@ -72,7 +72,14 @@ add query and if statement if user's role id has permission id of permission nam
 https://dev.to/kingsconsult/how-to-create-laravel-8-helpers-function-global-function-d8n
 
 ### NOTES
-import asset by using {{asset('######')}}  
+import asset by using {{asset('######')}}
+
+to solve bootstrap ui pagination problem add this to AppServiceProvider;
+use Illuminate\Pagination\Paginator;
+public function boot()
+{
+     Paginator::useBootstrap();
+}
 
 ### TOSTUDY
 filepond - for file upload (https://pqina.nl/filepond/docs/getting-started/installation/javascript/)
