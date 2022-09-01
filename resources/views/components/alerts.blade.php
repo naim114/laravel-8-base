@@ -10,6 +10,14 @@
     </div>
 @endif
 
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+            {{ $error }}
+        </div>
+    @endforeach
+@endif
+
 @if ($warningmsg = Session::get('warning'))
     <div class="alert alert-warning" role="alert">
         {{ $warningmsg }}
