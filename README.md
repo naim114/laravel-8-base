@@ -71,6 +71,8 @@ add query and if statement if user's role id has permission id of permission nam
 
 https://dev.to/kingsconsult/how-to-create-laravel-8-helpers-function-global-function-d8n
 
+run `composer dump-autoload` if function not found  
+
 ### NOTES
 import asset by using {{asset('######')}}
 
