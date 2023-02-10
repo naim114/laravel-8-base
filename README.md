@@ -39,6 +39,8 @@ dummy data for testing
 
 php artisan make:seeder ObjectName
 
+add `$this->call(YourSeederClassNameHere::class);` at DatabaseSeeder
+
 for countries seeds, use this package (https://github.com/webpatser/laravel-countries)
 
 ### Applying templates
