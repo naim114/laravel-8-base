@@ -26,8 +26,10 @@ to revert back migration
 `php artisan migrate:reset` 
 
 foreign key example on table migration files (e.g. table called team)
-`$table->integer('tournament_id')->unsigned();`
-`$table->foreign('tournament_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');`
+```
+$table->integer('tournament_id')->unsigned();
+$table->foreign('tournament_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+```
 
 #### Model
 if you would like to generate a database migration when you generate the model, you may use the --migration or -m option:
@@ -39,7 +41,7 @@ if you would like to generate a database migration when you generate the model, 
 `--controller`
 
 links to table by
-`    
+```  
 protected $table = 'teams';
 
 protected $fillable = [
@@ -48,7 +50,7 @@ protected $fillable = [
     'logo_path',
     'tournament_id',
 ];
-`
+```
 
 soft delete
 `use Illuminate\Database\Eloquent\SoftDeletes;`
