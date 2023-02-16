@@ -15,24 +15,58 @@ php artisan key:generate
 (make sure to enable/uncomment extension=fileinfo, extension=pdo_mysql at php.ini)
 
 ### Migration files
-php artisan make:migration ObjectName
+`php artisan make:migration ObjectName`
 
 ### Run migration w/ seeders
-php artisan migrate:refresh --seed
+`php artisan migrate:refresh --seed`
 
 (make sure to enable/uncomment extension=fileinfo, extension=pdo_mysql at php.ini)
 
 to revert back migration
-php artisan migrate:reset 
+`php artisan migrate:reset` 
+
+foreign key example on table migration files (e.g. table called team)
+`$table->integer('tournament_id')->unsigned();`
+`$table->foreign('tournament_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');`
 
 #### Model
 if you would like to generate a database migration when you generate the model, you may use the --migration or -m option:
 
-php artisan make:model ObjectName --migration
+`php artisan make:model ObjectName --migration`
 
 (more flag)
---seed
---controller
+`--seed`
+`--controller`
+
+links to table by
+`    
+protected $table = 'teams';
+
+protected $fillable = [
+    'name',
+    'category',
+    'logo_path',
+    'tournament_id',
+];
+`
+
+soft delete
+`use Illuminate\Database\Eloquent\SoftDeletes;`
+
+create relationship;
+- as parent
+`public function athlete()
+{
+    return $this->hasMany(Athlete::class);
+}`
+
+- as children    
+`public function tournament()
+{
+    return $this->belongsTo(Tournament::class);
+}`
+
+read more here: https://laravel.com/docs/8.x/eloquent-relationships
 
 ### Seeders
 dummy data for testing
